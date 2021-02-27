@@ -12,6 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+// I did not have time to finish the landscape view on this page as I could not figure it out
+
+
 public class SubmitReview extends AppCompatActivity {
 
     private static final boolean USE_FLAG = true;
@@ -56,6 +59,7 @@ public class SubmitReview extends AppCompatActivity {
         // works like an if else statement
         switch (id) {
             case R.id.profileButton:
+                //using flags to make sure im not spamming intents
                 Intent myIntent = new Intent(this, AccountPage.class);
                 if(USE_FLAG){
                     myIntent.addFlags(mFlag);
@@ -74,11 +78,12 @@ public class SubmitReview extends AppCompatActivity {
         }
     }
 
-
+// For some reason these functions do not work
     public void maskButtonClick(View v){
-        Toast.makeText(this,"You have determined this establishment pandemic friendly.", Toast.LENGTH_LONG).show();
+        Toast.makeText(SubmitReview.this,"You have determined this establishment pandemic friendly.", Toast.LENGTH_LONG).show();
     }
+
     public void virusButtonClick(View v){
-        Toast.makeText(this,"CYou have determined this establishment disguesting.", Toast.LENGTH_LONG).show();
+        Toast.makeText(SubmitReview.this,"You have determined this establishment disgusting.", Toast.LENGTH_LONG).show();
     }
 }

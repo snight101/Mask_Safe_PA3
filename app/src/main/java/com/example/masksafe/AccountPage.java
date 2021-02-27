@@ -54,6 +54,7 @@ public class AccountPage extends AppCompatActivity {
         switch (id) {
             case R.id.profileButton:
                 Intent myIntent = new Intent(this, AccountPage.class);
+                //using flags to make sure im not spamming intents
                 if(USE_FLAG){
                     myIntent.addFlags(mFlag);
                 }

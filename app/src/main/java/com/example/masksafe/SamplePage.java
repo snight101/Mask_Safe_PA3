@@ -48,7 +48,7 @@ public class SamplePage extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_mask_safe, menu);
         return true;
     }
-
+    //Menu commands
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -56,6 +56,7 @@ public class SamplePage extends AppCompatActivity {
         switch (id) {
             case R.id.profileButton:
                 Intent myIntent = new Intent(this, AccountPage.class);
+                //using flags to make sure im not spamming intents
                 if(USE_FLAG){
                     myIntent.addFlags(mFlag);
                 }
@@ -72,7 +73,7 @@ public class SamplePage extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    //Command to switch to submit review page
     public void submitReviewButtonClick(View v){
         Intent myIntent = new Intent(this, SubmitReview.class);
         if(USE_FLAG){

@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // Set BackgroundDrawable
         AB.setBackgroundDrawable(colorDrawable);
 
+        //Setting home page and logo
         AB.setDisplayShowHomeEnabled(true);
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         setIntent(intent);
     }
+
     public void onImageClick(View v){
         Intent myIntent = new Intent(this, SamplePage.class);
         if(USE_FLAG){
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.profileButton:
                 Intent myIntent = new Intent(this, AccountPage.class);
+                //using flags to make sure im not spamming intents
                 if(USE_FLAG){
                     myIntent.addFlags(mFlag);
                 }
