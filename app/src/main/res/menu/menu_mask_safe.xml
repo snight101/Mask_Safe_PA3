@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/sqlExample"
+        android:icon="@android:drawable/ic_menu_sort_alphabetically"
+        android:title="SQL"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/profileButton"
         android:icon="@drawable/settings_foreground"
         android:title="Profile"

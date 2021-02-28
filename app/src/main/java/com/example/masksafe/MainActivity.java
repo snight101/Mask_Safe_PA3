@@ -100,6 +100,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 startActivity(myIntent2);
                 return true;
+            case R.id.sqlExample:
+                Intent myIntent3 = new Intent(this, SQLExample.class);
+                if(USE_FLAG){
+                    myIntent3.addFlags(mFlag);
+                }
+                startActivity(myIntent3);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

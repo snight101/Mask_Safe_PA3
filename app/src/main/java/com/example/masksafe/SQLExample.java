@@ -10,12 +10,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-// I did not have time to finish the landscape view on this page as I could not figure it out
-
-
-public class SubmitReview extends AppCompatActivity {
+public class SQLExample extends AppCompatActivity {
 
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
@@ -23,7 +19,7 @@ public class SubmitReview extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_submit_review);
+        setContentView(R.layout.activity_s_q_l_example);
 
         ActionBar AB = getSupportActionBar();
         AB.setTitle("Mask Safe");
@@ -43,9 +39,9 @@ public class SubmitReview extends AppCompatActivity {
 
     /*
 
-       Adding menu to page
+      Adding menu to page
 
-    */
+   */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_mask_safe, menu);
@@ -86,12 +82,18 @@ public class SubmitReview extends AppCompatActivity {
         }
     }
 
-// For some reason these functions do not work
-    public void maskButtonClick(View v){
-        Toast.makeText(SubmitReview.this,"You have determined this establishment pandemic friendly.", Toast.LENGTH_LONG).show();
+    public void addButtonClick(View v){
+
     }
 
-    public void virusButtonClick(View v){
-        Toast.makeText(SubmitReview.this,"You have determined this establishment disgusting.", Toast.LENGTH_LONG).show();
+
+    public void findButtonClick(View v){
+
     }
+
+    public void deleteButtonClick(View v){
+
+    }
+
+
 }

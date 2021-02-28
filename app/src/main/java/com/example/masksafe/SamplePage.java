@@ -52,6 +52,7 @@ public class SamplePage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        // Menu Commands
         // works like an if else statement
         switch (id) {
             case R.id.profileButton:
@@ -68,6 +69,13 @@ public class SamplePage extends AppCompatActivity {
                     myIntent2.addFlags(mFlag);
                 }
                 startActivity(myIntent2);
+                return true;
+            case R.id.sqlExample:
+                Intent myIntent3 = new Intent(this, SQLExample.class);
+                if(USE_FLAG){
+                    myIntent3.addFlags(mFlag);
+                }
+                startActivity(myIntent3);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
