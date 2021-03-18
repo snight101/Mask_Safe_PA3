@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaskSafe">
-        <activity android:name=".SQLExample"></activity>
+        <activity android:name=".reviewRecyclerView"></activity>
         <activity android:name=".SubmitReview" />
+        <activity android:name=".Collections_Example" />
+        <activity android:name=".SQLExample" />
         <activity android:name=".AccountPage" />
         <activity android:name=".SamplePage" />
         <activity android:name=".MainActivity">

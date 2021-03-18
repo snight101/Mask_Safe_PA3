@@ -89,6 +89,13 @@ public class SamplePage extends AppCompatActivity {
         }
         startActivity(myIntent);
     }
-
+    //Command to switch to submit review page
+    public void moreReviewsButtonClick(View v){
+        Intent myIntent = new Intent(this, reviewRecyclerView.class);
+        if(USE_FLAG){
+            myIntent.addFlags(mFlag);
+        }
+        startActivity(myIntent);
+    }
 
 }

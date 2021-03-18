@@ -20,11 +20,12 @@
                 android:layout_height="57dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/accountSettingsButton"
                 android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:onClick="accountSettingsButtonClick"
                 android:text="Account Settings"
                 app:backgroundTint="#2F9CCD" />
 
@@ -33,11 +34,12 @@
                 android:layout_height="28dp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/editProfileButton"
                 android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:onClick="editProfileButtonClick"
                 android:text="Edit Profile"
                 app:backgroundTint="#2F9CCD" />
 
@@ -90,7 +92,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/userName2"
+                        android:id="@+id/userNameRecyclerTextView"
                         android:layout_width="match_parent"
                         android:layout_height="31dp"
                         android:layout_weight="1"
@@ -105,14 +107,14 @@
                         android:background="?android:attr/listDivider" />
 
                     <ImageView
-                        android:id="@+id/userScore1"
+                        android:id="@+id/userScoreImage"
                         android:layout_width="102dp"
                         android:layout_height="88dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/covid_icon" />
 
                     <ImageView
-                        android:id="@+id/imageInput1"
+                        android:id="@+id/userImageInput"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
@@ -133,7 +135,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/businessName"
+                        android:id="@+id/businessNameRecyclerTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight=".07"
@@ -148,7 +150,7 @@
                         android:background="?android:attr/listDivider" />
 
                     <TextView
-                        android:id="@+id/review1"
+                        android:id="@+id/reviewContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

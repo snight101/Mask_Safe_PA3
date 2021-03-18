@@ -127,7 +127,7 @@
                     android:layout_weight="1" />
 
                 <Button
-                    android:id="@+id/sortButton"
+                    android:id="@+id/moreReviewsButton"
                     android:layout_width="134dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -159,7 +159,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/userName2"
+                            android:id="@+id/userNameRecyclerTextView"
                             android:layout_width="match_parent"
                             android:layout_height="31dp"
                             android:layout_weight="1"
@@ -174,14 +174,14 @@
                             android:background="?android:attr/listDivider" />
 
                         <ImageView
-                            android:id="@+id/userScore1"
+                            android:id="@+id/userScoreImage"
                             android:layout_width="102dp"
                             android:layout_height="88dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/covid_icon" />
 
                         <ImageView
-                            android:id="@+id/imageInput1"
+                            android:id="@+id/userImageInput"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_weight="1"
@@ -202,7 +202,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/businessName"
+                            android:id="@+id/businessNameRecyclerTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight=".07"
@@ -217,7 +217,7 @@
                             android:background="?android:attr/listDivider" />
 
                         <TextView
-                            android:id="@+id/review1"
+                            android:id="@+id/reviewContent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class AccountPage extends AppCompatActivity {
 
@@ -78,5 +79,21 @@ public class AccountPage extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /*
+        Button Commands
+     */
+
+    public void accountSettingsButtonClick(View v){
+       //nothing in here as of yet. I don't know of any account settings I will be able to implement yet.
+    }
+
+
+
+    public void editProfileButtonClick(View v){
+        /*
+            I think I will be adding the ability to change both your user name and profile name
+         */
     }
 }

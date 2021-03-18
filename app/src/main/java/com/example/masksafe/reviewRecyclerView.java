@@ -9,22 +9,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    //Used an Image button to take place of a Google Maps API
-    private ImageButton mImageButton;
+public class reviewRecyclerView extends AppCompatActivity {
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mImageButton = (ImageButton)findViewById(R.id.imageButton);
+        setContentView(R.layout.activity_review_recycler_view);
 
         ActionBar AB = getSupportActionBar();
         AB.setTitle("Mask Safe");
@@ -37,37 +30,10 @@ public class MainActivity extends AppCompatActivity {
         // Set BackgroundDrawable
         AB.setBackgroundDrawable(colorDrawable);
 
-        //Setting home page and logo
         AB.setDisplayShowHomeEnabled(true);
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
     }
-
-    /*
-
-       Adding Intent and flag commands
-
-     */
-
-    @Override
-    protected  void onNewIntent(Intent intent){
-        super.onNewIntent(intent);
-        setIntent(intent);
-    }
-
-    public void onImageClick(View v){
-        Intent myIntent = new Intent(this, SamplePage.class);
-        if(USE_FLAG){
-            myIntent.addFlags(mFlag);
-        }
-        startActivity(myIntent);
-    }
-
-
-
-
-
-
     /*
 
         Adding menu to page
@@ -78,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_mask_safe, menu);
         return true;
     }
-
     //Menu commands
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -107,13 +72,6 @@ public class MainActivity extends AppCompatActivity {
                     myIntent3.addFlags(mFlag);
                 }
                 startActivity(myIntent3);
-                return true;
-            case R.id.collection:
-                Intent myIntent4 = new Intent(this, Collections_Example.class);
-                if(USE_FLAG){
-                    myIntent4.addFlags(mFlag);
-                }
-                startActivity(myIntent4);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

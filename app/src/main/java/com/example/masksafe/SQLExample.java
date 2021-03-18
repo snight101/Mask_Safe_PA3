@@ -10,8 +10,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class SQLExample extends AppCompatActivity {
+    private TextView mIDTextView;
+    private EditText mUserNameEditText;
+    private EditText mContentEditText;
+
 
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
@@ -20,6 +27,10 @@ public class SQLExample extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_s_q_l_example);
+
+        mIDTextView = (TextView)findViewById(R.id.reviewIDEditTextView);
+        mUserNameEditText = (EditText)findViewById(R.id.userNameEditText);
+        mContentEditText = (EditText)findViewById(R.id.contentEditText);
 
         ActionBar AB = getSupportActionBar();
         AB.setTitle("Mask Safe");
@@ -82,16 +93,53 @@ public class SQLExample extends AppCompatActivity {
         }
     }
 
+    // Take username and content and add it to Review Table
     public void addButtonClick(View v){
+        String username = mUserNameEditText.getText().toString();
+        String content = mContentEditText.getText().toString();
+        Review review = new Review(username, content);
 
+        ReviewDBHandler handler = new ReviewDBHandler(this);
+        handler.addReview(review);
+
+        mUserNameEditText.setText("");
+        mContentEditText.setText("");
+
+        Toast.makeText(this, username + " was added to the database.", Toast.LENGTH_SHORT).show();
     }
 
-
+    // Find review by username and put their review ID and Content in appropriate fields
     public void findButtonClick(View v){
+        String username = mUserNameEditText.getText().toString();
+        ReviewDBHandler handler = new ReviewDBHandler(this);
 
+        Review review = handler.findReview(username);
+
+        if(review != null){
+            mIDTextView.setText(String.valueOf(review.getmID()));
+            mContentEditText.setText(review.getmContent());
+        }
+        else{
+            mIDTextView.setText("Student was not found.");
+            mContentEditText.setText("");
+        }
     }
-
+    //find and delete review by user name
     public void deleteButtonClick(View v){
+        String username = mUserNameEditText.getText().toString();
+        ReviewDBHandler handler = new ReviewDBHandler(this);
+
+        boolean result = handler.deleteReview(username);
+
+        if(result){
+            mUserNameEditText.setText("");
+            mContentEditText.setText("");
+            mIDTextView.setText("Record Deleted");
+        }
+        else
+        {
+            mIDTextView.setText("Review found");
+        }
 
     }
 
