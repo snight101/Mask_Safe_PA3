@@ -9,11 +9,33 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ReviewDBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
+
+    //
     private static final String DATABASE_NAME = "reviewDB.db";
+    //Tables
     private static final String TABLE_REVIEW = "Reviews";
+    private static final String TABLE_USERS = "Users";
+    private static final String TABLE_BUSINESSES = "Businesses";
+
+    //Reviews rows
     private static final String COLUMN_REVIEWID = "review_id";
-    private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_CONTENT = "content";
+    private static final String COLUMN_IMAGE = "image";
+    private static final String COLUMN_SCORE = "score";
+
+    //primary keys for other tables referenced in Reviews
+    private static final String COLUMN_USERID = "userID";
+    private static final String COLUMN_BUSINESSID = "businessID";
+
+    //Users rows
+    private static final String COLUMN_USERNAME = "username";
+
+    //Businesses rows
+    private static final String COLUMN_BUSINESSNAME = "business_name";
+    private static final String COLUMN_ADDRESS = "address";
+    private static final String COLUMN_RATING = "rating";
+    private static final String COLUMN_API = "api_key";
+
 
     public ReviewDBHandler(Context c){
         super(c, DATABASE_NAME, null, DATABASE_VERSION);
@@ -21,11 +43,36 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
+        //Create Reviews table
         String CREATE_REVIEW_TABLE = "CREATE TABLE " +
                 TABLE_REVIEW + "(" +
                 COLUMN_REVIEWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_USERNAME + " TEXT, " +
-                COLUMN_CONTENT + " TEXT)";
+                COLUMN_IMAGE + " TEXT, " +
+                COLUMN_SCORE + " INTEGER, " +
+                COLUMN_USERID + " INTEGER, FOREIGN KEY (" +
+
+                COLUMN_BUSINESSID + " INTEGER NOT NULL, FOREIGN KEY (" +
+                COLUMN_BUSINESSID + ") REFERENCES " + TABLE_BUSINESSES + " (" + COLUMN_BUSINESSID + "))";
+
+        //Create Users table
+        String CREATE_USERS_TABLE = "CREATE TABLE " +
+                TABLE_USERS + "(" +
+                COLUMN_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USERNAME + " TEXT)";
+
+
+        //Create Business table
+        String CREATE_BUSINESSES_TABLE = "CREATE TABLE " +
+                TABLE_BUSINESSES + "(" +
+                COLUMN_BUSINESSID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_BUSINESSNAME + " TEXT, " +
+                COLUMN_ADDRESS + " TEXT, " +
+                COLUMN_RATING + " FLOAT, " +
+                COLUMN_API + " TEXT)";
+
+        //Create Tables in sql
+        db.execSQL(CREATE_BUSINESSES_TABLE);
+        db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_REVIEW_TABLE);
     }
 

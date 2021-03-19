@@ -2,6 +2,8 @@ package com.example.masksafe;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,11 +16,15 @@ public class reviewRecyclerView extends AppCompatActivity {
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
 
+    ReviewRecyclerViewAdapter myAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_recycler_view);
 
+
+        //Adding menu
         ActionBar AB = getSupportActionBar();
         AB.setTitle("Mask Safe");
         // Define ColorDrawable object and parse color
@@ -33,6 +39,21 @@ public class reviewRecyclerView extends AppCompatActivity {
         AB.setDisplayShowHomeEnabled(true);
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
+
+        /*
+            Recycler View creation
+         */
+
+        //vvvvvvvv MAKE INTO DATA CLASS
+        String[] myList = new String[3];
+        myList[0] = "Sam Night";
+        myList[1] = "JD";
+        myList[2] = "Dad";
+
+        RecyclerView rView = (RecyclerView)findViewById(R.id.reviewRecyclerView);
+        rView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new ReviewRecyclerViewAdapter(myList);
+        rView.setAdapter(myAdapter);
     }
     /*
 

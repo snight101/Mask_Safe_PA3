@@ -88,10 +88,10 @@ public class SubmitReview extends AppCompatActivity {
 
     // For some reason these functions do not work
     public void maskButtonClick(View v){
-        Toast.makeText(SubmitReview.this,"You have determined this establishment pandemic friendly.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"You have determined this establishment pandemic friendly.", Toast.LENGTH_LONG).show();
     }
 
     public void virusButtonClick(View v){
-        Toast.makeText(SubmitReview.this,"You have determined this establishment disgusting.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"You have determined this establishment disgusting.", Toast.LENGTH_LONG).show();
     }
 }

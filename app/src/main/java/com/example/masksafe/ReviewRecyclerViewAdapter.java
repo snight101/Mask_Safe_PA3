@@ -1,7 +1,9 @@
 package com.example.masksafe;
 
 import android.media.Image;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecyclerViewAdapter.ViewHolder> {
     //will become an of a data class with multiple data types
     private String[] mReviewData;
+
+
+    // MAKE INTO A DATA CLASS AS WELL VVVVVVVVVVVVV
 
     public ReviewRecyclerViewAdapter(String [] data){
         mReviewData = data;
@@ -59,5 +64,25 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
         }
     }
 
+    //Override Methods
 
+    //Create view holder
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType){
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.reviewrecycler_row, viewGroup,
+                false);
+
+        return new ViewHolder(view);
+    }
+
+    //Binds data to review holder created above
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, final int position){
+        viewHolder.getmUserName().setText(mReviewData[position]);
+    }
+
+    //How many items are you showing
+    @Override public int getItemCount(){
+        return mReviewData.length;
+    }
 }

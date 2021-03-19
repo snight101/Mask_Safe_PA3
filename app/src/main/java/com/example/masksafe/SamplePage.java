@@ -2,6 +2,8 @@ package com.example.masksafe;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +18,8 @@ public class SamplePage extends AppCompatActivity {
 
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,9 @@ public class SamplePage extends AppCompatActivity {
         AB.setDisplayShowHomeEnabled(true);
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
+
+
+
     }
 
     /*
