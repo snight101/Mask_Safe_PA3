@@ -11,7 +11,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
 
 
     //
-    private static final String DATABASE_NAME = "reviewDB.db";
+    private static final String DATABASE_NAME = "reviewDB1.db";
     //Tables
     private static final String TABLE_REVIEW = "Reviews";
     private static final String TABLE_USERS = "Users";
@@ -24,8 +24,8 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_SCORE = "score";
 
     //primary keys for other tables referenced in Reviews
-    private static final String COLUMN_USERID = "userID";
-    private static final String COLUMN_BUSINESSID = "businessID";
+    private static final String COLUMN_USERID = "user_id";
+    private static final String COLUMN_BUSINESSID = "business_id";
 
     //Users rows
     private static final String COLUMN_USERNAME = "username";
@@ -46,16 +46,17 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         //Create Reviews table
+
         String CREATE_REVIEW_TABLE = "CREATE TABLE " +
                 TABLE_REVIEW + "(" +
                 COLUMN_REVIEWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_CONTENT + " TEXT, " +
                 COLUMN_IMAGE + " TEXT, " +
                 COLUMN_SCORE + " INTEGER, " +
-                COLUMN_USERID + " INTEGER, FOREIGN KEY (" +
-                COLUMN_USERID + ") REFERENCES " + TABLE_USERS + " (" + COLUMN_USERID + "), " +
-                COLUMN_BUSINESSID + " INTEGER NOT NULL, FOREIGN KEY (" +
-                COLUMN_BUSINESSID + ") REFERENCES " + TABLE_BUSINESSES + " (" + COLUMN_BUSINESSID + "))";
+                COLUMN_USERID + " INTEGER, " +
+                COLUMN_BUSINESSID + " INTEGER)";
+
+
 
         //Create Users table
         String CREATE_USERS_TABLE = "CREATE TABLE " +
@@ -84,6 +85,8 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_REVIEW);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSINESSES);
         onCreate(db);
     }
 
@@ -102,9 +105,10 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_REVIEW, null, myValues);
         db.close();
 
-
-
     }
+
+
+}
 
 
 
@@ -159,5 +163,3 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
     }
 
      */
-
-}

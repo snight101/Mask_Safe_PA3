@@ -44,7 +44,10 @@ public class reviewRecyclerView extends AppCompatActivity {
             Recycler View creation
          */
 
+
         //vvvvvvvv MAKE INTO DATA CLASS
+
+        /*
         String[] myList = new String[3];
         myList[0] = "Sam Night";
         myList[1] = "JD";
@@ -54,6 +57,8 @@ public class reviewRecyclerView extends AppCompatActivity {
         rView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new ReviewRecyclerViewAdapter(myList);
         rView.setAdapter(myAdapter);
+
+         */
     }
     /*
 

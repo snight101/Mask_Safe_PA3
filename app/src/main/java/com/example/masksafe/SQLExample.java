@@ -93,6 +93,9 @@ public class SQLExample extends AppCompatActivity {
         }
     }
 
+    /*
+
+
     // Take username and content and add it to Review Table
     public void addButtonClick(View v){
         String username = mUserNameEditText.getText().toString();
@@ -109,7 +112,7 @@ public class SQLExample extends AppCompatActivity {
     }
 
 
-    /*
+
 
     // Find review by username and put their review ID and Content in appropriate fields
     public void findButtonClick(View v){
