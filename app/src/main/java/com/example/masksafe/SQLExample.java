@@ -108,6 +108,9 @@ public class SQLExample extends AppCompatActivity {
         Toast.makeText(this, username + " was added to the database.", Toast.LENGTH_SHORT).show();
     }
 
+
+    /*
+
     // Find review by username and put their review ID and Content in appropriate fields
     public void findButtonClick(View v){
         String username = mUserNameEditText.getText().toString();
@@ -125,6 +128,7 @@ public class SQLExample extends AppCompatActivity {
         }
     }
     //find and delete review by user name
+
     public void deleteButtonClick(View v){
         String username = mUserNameEditText.getText().toString();
         ReviewDBHandler handler = new ReviewDBHandler(this);
@@ -142,6 +146,8 @@ public class SQLExample extends AppCompatActivity {
         }
 
     }
+
+     */
 
 
 }

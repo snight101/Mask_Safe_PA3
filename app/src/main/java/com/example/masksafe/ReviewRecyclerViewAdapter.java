@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecyclerViewAdapter.ViewHolder> {
-    //will become an of a data class with multiple data types
-    private String[] mReviewData;
 
 
-    // MAKE INTO A DATA CLASS AS WELL VVVVVVVVVVVVV
+    private Review[] mReviewData;
 
-    public ReviewRecyclerViewAdapter(String [] data){
+
+    public ReviewRecyclerViewAdapter(Review [] data){
         mReviewData = data;
     }
     //View Holder constructor
@@ -78,7 +77,20 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
     //Binds data to review holder created above
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position){
-        viewHolder.getmUserName().setText(mReviewData[position]);
+        viewHolder.getmReviewContent().setText(mReviewData[position].getmContent());
+        //Will reference Review class once Google Maps Api key is installed and I can select multiple businesses on the main activity
+        viewHolder.getmBusinessTitle().setText("Bloomington Cafe");
+        //Mess with this to set user name correctly
+        viewHolder.getmUserName().setText("Sam Night");
+        if (mReviewData[position].getmScore() == 1){
+            viewHolder.getmReviewScore().setImageResource(R.drawable.covid_icon);
+        }
+        else{
+            viewHolder.getmReviewScore().setImageResource(R.drawable.ic_logo);
+        }
+        //Once we can take pictures using the app this will change
+        viewHolder.getmReviewImage().setImageResource(R.drawable.picupload);
+
     }
 
     //How many items are you showing

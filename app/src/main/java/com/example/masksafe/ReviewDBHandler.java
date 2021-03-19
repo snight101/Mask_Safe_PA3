@@ -29,6 +29,8 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
 
     //Users rows
     private static final String COLUMN_USERNAME = "username";
+    private static final String COLUMN_USERFULLNAME = "username_fullname";
+
 
     //Businesses rows
     private static final String COLUMN_BUSINESSNAME = "business_name";
@@ -47,10 +49,11 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
         String CREATE_REVIEW_TABLE = "CREATE TABLE " +
                 TABLE_REVIEW + "(" +
                 COLUMN_REVIEWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_CONTENT + " TEXT, " +
                 COLUMN_IMAGE + " TEXT, " +
                 COLUMN_SCORE + " INTEGER, " +
                 COLUMN_USERID + " INTEGER, FOREIGN KEY (" +
-
+                COLUMN_USERID + ") REFERENCES " + TABLE_USERS + " (" + COLUMN_USERID + "), " +
                 COLUMN_BUSINESSID + " INTEGER NOT NULL, FOREIGN KEY (" +
                 COLUMN_BUSINESSID + ") REFERENCES " + TABLE_BUSINESSES + " (" + COLUMN_BUSINESSID + "))";
 
@@ -58,6 +61,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
         String CREATE_USERS_TABLE = "CREATE TABLE " +
                 TABLE_USERS + "(" +
                 COLUMN_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USERFULLNAME + " TEXT, " +
                 COLUMN_USERNAME + " TEXT)";
 
 
@@ -74,6 +78,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_BUSINESSES_TABLE);
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_REVIEW_TABLE);
+
     }
 
     @Override
@@ -82,16 +87,29 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //Once I have the google API set up I will use a KEY to allow me to add reviews to multiple businesses
     public void addReview(Review review){
         ContentValues myValues = new ContentValues();
-        myValues.put(COLUMN_USERNAME, review.getmUserName());
+
+        myValues.put(COLUMN_REVIEWID, review.getmID());
         myValues.put(COLUMN_CONTENT, review.getmContent());
+        myValues.put(COLUMN_IMAGE, review.getmImage());
+        myValues.put(COLUMN_SCORE, review.getmScore());
+        myValues.put(COLUMN_USERID, review.getmUserID());
+        myValues.put(COLUMN_BUSINESSID, review.getmBusinessID());
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_REVIEW, null, myValues);
         db.close();
+
+
+
     }
 
+
+
+
+    /*
     public Review findReview(String username){
         String sqlQuery = "SELECT  * FROM " + TABLE_REVIEW +
                 " WHERE " + COLUMN_USERNAME + " =\"" +
@@ -133,9 +151,13 @@ public class ReviewDBHandler extends SQLiteOpenHelper {
 
             result = true;
         }
+
+
         db.close();
         return result;
 
     }
+
+     */
 
 }
