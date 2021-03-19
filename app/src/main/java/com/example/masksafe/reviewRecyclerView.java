@@ -5,12 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class reviewRecyclerView extends AppCompatActivity {
     private static final boolean USE_FLAG = true;
@@ -44,27 +51,30 @@ public class reviewRecyclerView extends AppCompatActivity {
             Recycler View creation
          */
 
+        //Get data from database
 
-        //vvvvvvvv MAKE INTO DATA CLASS
 
-        /*
-        String[] myList = new String[3];
-        myList[0] = "Sam Night";
-        myList[1] = "JD";
-        myList[2] = "Dad";
+        ReviewDBHandler dbHandler = new ReviewDBHandler(ReviewDBHandler.class, null, reviewDB.db, 1);
+
+        List<Review> reviews = dbHandler.getReviews();
 
         RecyclerView rView = (RecyclerView)findViewById(R.id.reviewRecyclerView);
         rView.setLayoutManager(new LinearLayoutManager(this));
-        myAdapter = new ReviewRecyclerViewAdapter(myList);
+        myAdapter = new ReviewRecyclerViewAdapter(reviews);
         rView.setAdapter(myAdapter);
 
-         */
+
     }
+
+
+
+
     /*
 
         Adding menu to page
 
      */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_mask_safe, menu);
@@ -102,5 +112,11 @@ public class reviewRecyclerView extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        myAdapter.notifyDataSetChanged();
     }
 }
