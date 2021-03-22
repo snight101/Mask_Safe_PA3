@@ -19,7 +19,7 @@ public class AccountPage extends AppCompatActivity {
 
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
-    private ReviewRecyclerViewAdapter myAdapter;
+    ReviewRecyclerViewAdapter myAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,9 @@ public class AccountPage extends AppCompatActivity {
 
         List<Review> reviews = review.getReviews();
 
-
         //Add recycler view for page
 
+        //For some reason this is glitched and won't remove certain reviews
         for(int i = 0; i < reviews.size(); i++){
             if(reviews.get(i).getmUserID() != 1){
                 reviews.remove(i);
@@ -60,8 +60,8 @@ public class AccountPage extends AppCompatActivity {
 
         RecyclerView rView = (RecyclerView)findViewById(R.id.accountRecyclerView);
         rView.setLayoutManager(new LinearLayoutManager(this));
-        myAdapter = new ReviewRecyclerViewAdapter(reviews);
-        rView.setAdapter(myAdapter);
+        myAdapter2 = new ReviewRecyclerViewAdapter(reviews);
+        rView.setAdapter(myAdapter2);
     }
 
     /*

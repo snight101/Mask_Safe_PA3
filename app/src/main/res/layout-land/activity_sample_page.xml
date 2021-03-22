@@ -6,22 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".SamplePage">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,17 +119,27 @@
                     android:layout_height="15dp"
                     android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/moreReviewsButton"
-                    android:layout_width="134dp"
+                <TextView
+                    android:id="@+id/highlightedReviewsTextView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="v    Sort"
-                    app:backgroundTint="#2F9CCD" />
+                    android:gravity="center"
+                    android:text="Business Reviews"
+                    android:textAllCaps="false"
+                    android:textSize="24sp"
+                    android:textStyle="bold|italic" />
+
+                <View
+                    android:id="@+id/divider12"
+                    android:layout_width="250dp"
+                    android:layout_height="3dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/listDivider" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
+                    android:layout_height="22dp"
                     android:layout_weight="1" />
 
                 <View
@@ -146,86 +149,6 @@
                     android:layout_weight="1"
                     android:background="?android:attr/listDivider" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="20dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/userNameRecyclerTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="31dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Sam N" />
-
-                        <View
-                            android:id="@+id/divider3"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_weight="1"
-                            android:background="?android:attr/listDivider" />
-
-                        <ImageView
-                            android:id="@+id/userScoreImage"
-                            android:layout_width="102dp"
-                            android:layout_height="88dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/covid_icon" />
-
-                        <ImageView
-                            android:id="@+id/userImageInput"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/picupload" />
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/divider2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".01"
-                        android:background="?android:attr/listDivider" />
-
-                    <LinearLayout
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/businessNameRecyclerTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight=".07"
-                            android:gravity="center|top"
-                            android:text="Bloomington Cafe" />
-
-                        <View
-                            android:id="@+id/divider4"
-                            android:layout_width="match_parent"
-                            android:layout_height="7dp"
-                            android:layout_weight=".005"
-                            android:background="?android:attr/listDivider" />
-
-                        <TextView
-                            android:id="@+id/reviewContent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="When I entered this establishment everyone was wearing masks and every cook was wearing gloves." />
-                    </LinearLayout>
-
-                </LinearLayout>
-
                 <View
                     android:id="@+id/divider5"
                     android:layout_width="match_parent"
@@ -233,89 +156,19 @@
                     android:layout_weight="1"
                     android:background="?android:attr/listDivider" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="20dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/userName"
-                            android:layout_width="match_parent"
-                            android:layout_height="31dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Alex Z" />
-
-                        <View
-                            android:id="@+id/divider6"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_weight="1"
-                            android:background="?android:attr/listDivider" />
-
-                        <ImageView
-                            android:id="@+id/userScore2"
-                            android:layout_width="102dp"
-                            android:layout_height="88dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/ic_logo"
-                            tools:ignore="VectorDrawableCompat" />
-
-                        <ImageView
-                            android:id="@+id/imageInput2"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/picupload" />
-                    </LinearLayout>
-
-                    <View
-                        android:id="@+id/divider7"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".01"
-                        android:background="?android:attr/listDivider" />
-
-                    <LinearLayout
-                        android:layout_width="18dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/businessName2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight=".07"
-                            android:gravity="center|top"
-                            android:text="Bloomington Cafe" />
-
-                        <View
-                            android:id="@+id/divider8"
-                            android:layout_width="match_parent"
-                            android:layout_height="7dp"
-                            android:layout_weight=".005"
-                            android:background="?android:attr/listDivider" />
-
-                        <TextView
-                            android:id="@+id/review2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="None of the employees were wearing masks and there was no sign outside requiring masks." />
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:orientation="horizontal"/>
 
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
-
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

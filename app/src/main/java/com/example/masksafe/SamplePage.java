@@ -25,6 +25,7 @@ public class SamplePage extends AppCompatActivity {
     private int reviewScore = 0;
     private TextView mReviewScore;
     private ImageView mReviewImage;
+    ReviewRecyclerViewAdapter myAdapter;
 
 
 
@@ -80,6 +81,12 @@ public class SamplePage extends AppCompatActivity {
         else{
             mReviewImage.setImageResource(R.drawable.ic_logo);
         }
+        //Create recycler view
+
+        RecyclerView rView = (RecyclerView)findViewById(R.id.recyclerView);
+        rView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new ReviewRecyclerViewAdapter(reviews);
+        rView.setAdapter(myAdapter);
 
 
     }
@@ -94,6 +101,9 @@ public class SamplePage extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        myAdapter.notifyDataSetChanged();
+
         reviewScore = 0;
 
         ReviewDBHandler review = new ReviewDBHandler(this);
@@ -122,6 +132,13 @@ public class SamplePage extends AppCompatActivity {
         else{
             mReviewImage.setImageResource(R.drawable.ic_logo);
         }
+
+        /*
+            Recycler View creation
+         */
+
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -169,13 +186,6 @@ public class SamplePage extends AppCompatActivity {
         }
         startActivity(myIntent);
     }
-    //Command to switch to submit review page
-    public void moreReviewsButtonClick(View v){
-        Intent myIntent = new Intent(this, reviewRecyclerView.class);
-        if(USE_FLAG){
-            myIntent.addFlags(mFlag);
-        }
-        startActivity(myIntent);
-    }
+
 
 }

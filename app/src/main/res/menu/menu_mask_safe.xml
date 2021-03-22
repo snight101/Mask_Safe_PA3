@@ -18,8 +18,4 @@
         android:icon="@drawable/map_foreground"
         android:title="Map Page"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/collection"
-        android:title="Collections"
-        app:showAsAction="ifRoom" />
 </menu>

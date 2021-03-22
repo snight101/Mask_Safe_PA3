@@ -108,13 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 startActivity(myIntent3);
                 return true;
-            case R.id.collection:
-                Intent myIntent4 = new Intent(this, Collections_Example.class);
-                if(USE_FLAG){
-                    myIntent4.addFlags(mFlag);
-                }
-                startActivity(myIntent4);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
