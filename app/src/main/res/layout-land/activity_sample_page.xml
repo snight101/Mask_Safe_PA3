@@ -65,7 +65,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/scoreImageView"
                         android:layout_width="211dp"
                         android:layout_height="149dp"
                         android:layout_weight="1"

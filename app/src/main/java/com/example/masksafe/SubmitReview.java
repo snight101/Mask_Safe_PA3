@@ -121,7 +121,7 @@ public class SubmitReview extends AppCompatActivity {
         }
 
         //These will be more specific and customizeable once the google API is added
-        Review review = new Review(content, null, score, 0, 0);
+        Review review = new Review(content, null, score, 1, 1);
 
         ReviewDBHandler handler = new ReviewDBHandler(this);
         handler.addReview(review);

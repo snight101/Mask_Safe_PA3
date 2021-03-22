@@ -47,21 +47,41 @@ public class reviewRecyclerView extends AppCompatActivity {
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
 
+
+
+
+
         /*
             Recycler View creation
          */
 
+
         //Get data from database
+        //ReviewDBHandler dbHandler = new ReviewDBHandler(ReviewDBHandler.class, null, reviewDB.db, 1);
+
+        //List<Review> reviews = dbHandler.getReviews();
 
 
-        ReviewDBHandler dbHandler = new ReviewDBHandler(ReviewDBHandler.class, null, reviewDB.db, 1);
+        ReviewDBHandler review = new ReviewDBHandler(null);
 
-        List<Review> reviews = dbHandler.getReviews();
+        List<Review> reviews = review.getReviews();
+
+        //Remove reviews from list if they aren't from bloomington cafe
+
+        for(int i = 0; i < reviews.size(); i++){
+            if(reviews.get(i).getmBusinessID() != 1){
+                reviews.remove(i);
+            }
+        }
+
+        //Create recycler view
 
         RecyclerView rView = (RecyclerView)findViewById(R.id.reviewRecyclerView);
         rView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new ReviewRecyclerViewAdapter(reviews);
         rView.setAdapter(myAdapter);
+
+
 
 
     }

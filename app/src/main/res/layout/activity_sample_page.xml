@@ -65,7 +65,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/scoreImageView"
                         android:layout_width="211dp"
                         android:layout_height="149dp"
                         android:layout_weight="1"
@@ -188,7 +188,7 @@
                             android:layout_height="31dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Sam N" />
+                            android:text="Sam Night" />
 
                         <View
                             android:id="@+id/divider3"
@@ -275,7 +275,7 @@
                             android:layout_height="31dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Alex Z" />
+                            android:text="Bruce Willis" />
 
                         <View
                             android:id="@+id/divider6"

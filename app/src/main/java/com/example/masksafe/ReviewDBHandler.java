@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ReviewDBHandler extends SQLiteOpenHelper  {
     private static final int DATABASE_VERSION = 1;
-
+    public List<Review> review_list;
 
     //
     private static final String DATABASE_NAME = "reviewDB.db";
@@ -115,7 +115,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
     //I tried using the code from https://stackoverflow.com/questions/44656025/getting-data-from-sqlite-using-custom-object-arraylist
     public List<Review> getReviews(){
 
-        List<Review> review_list = new ArrayList<Review>();
+        review_list = new ArrayList<Review>();
         SQLiteDatabase db = this.getWritableDatabase();
         String[] field = {COLUMN_REVIEWID, COLUMN_CONTENT, COLUMN_IMAGE, COLUMN_SCORE, COLUMN_USERID, COLUMN_BUSINESSNAME};
         Cursor c = db.query(TABLE_REVIEW, field, null, null, null, null, null);
@@ -141,7 +141,6 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
         return review_list;
     }
 
-    public List<Review> reviews = getReviews();
 
 
 

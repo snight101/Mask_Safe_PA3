@@ -2,6 +2,8 @@ package com.example.masksafe;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,10 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.List;
+
 public class AccountPage extends AppCompatActivity {
 
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+    private ReviewRecyclerViewAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,28 @@ public class AccountPage extends AppCompatActivity {
         AB.setDisplayShowHomeEnabled(true);
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
+
+
+        //Get data
+        ReviewDBHandler review = new ReviewDBHandler(null);
+
+        List<Review> reviews = review.getReviews();
+
+
+        //Add recycler view for page
+
+        for(int i = 0; i < reviews.size(); i++){
+            if(reviews.get(i).getmUserID() != 1){
+                reviews.remove(i);
+            }
+        }
+
+        //Create recycler view
+
+        RecyclerView rView = (RecyclerView)findViewById(R.id.accountRecyclerView);
+        rView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new ReviewRecyclerViewAdapter(reviews);
+        rView.setAdapter(myAdapter);
     }
 
     /*

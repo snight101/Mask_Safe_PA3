@@ -80,9 +80,32 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
     public void onBindViewHolder(ViewHolder viewHolder, final int position){
         viewHolder.getmReviewContent().setText(mReviewData.get(position).getmContent());
         //Will reference Review class once Google Maps Api key is installed and I can select multiple businesses on the main activity
-        viewHolder.getmBusinessTitle().setText("Bloomington Cafe");
-        //Mess with this to set user name correctly
-        viewHolder.getmUserName().setText("Sam Night");
+        if(mReviewData.get(position).getmBusinessID() == 1){
+            viewHolder.getmBusinessTitle().setText("Bloomington Cafe");
+        }
+        else{
+            viewHolder.getmBusinessTitle().setText("Bub's Bugers");
+        }
+        //I would have selected this by referencing a foreign key but that is not currently possible with how the database is set up
+        if(mReviewData.get(position).getmUserID() == 1){
+            viewHolder.getmUserName().setText("Sam Night");
+        }
+        else if(mReviewData.get(position).getmUserID() == 2){
+            viewHolder.getmUserName().setText("Michael Jordan");
+        }
+        else if(mReviewData.get(position).getmUserID() == 3){
+            viewHolder.getmUserName().setText("James Bond");
+        }
+        else if(mReviewData.get(position).getmUserID() == 4){
+            viewHolder.getmUserName().setText("Bruce Willis");
+        }
+        else{
+            viewHolder.getmUserName().setText("Jackie Chan");
+        }
+
+
+
+        //Set reviewImage based on the score given.
         if (mReviewData.get(position).getmScore() == 1){
             viewHolder.getmReviewScore().setImageResource(R.drawable.covid_icon);
         }

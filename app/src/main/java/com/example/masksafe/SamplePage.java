@@ -13,11 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class SamplePage extends AppCompatActivity {
 
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+    private int reviewScore = 0;
+    private TextView mReviewScore;
+    private ImageView mReviewImage;
 
 
 
@@ -41,6 +48,30 @@ public class SamplePage extends AppCompatActivity {
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
 
+        //Set review score for page
+
+        mReviewScore = (TextView)findViewById(R.id.percentageTextView);
+
+        mReviewImage = (ImageView) findViewById(R.id.scoreImageView);
+
+        ReviewDBHandler review = new ReviewDBHandler(null);
+
+        List<Review> reviews = review.getReviews();
+
+        for(int i = 0; i < reviews.size(); i++){
+            int score = reviews.get(i).getmScore();
+            reviewScore += score;
+        }
+        int realScore = reviewScore/reviews.size();
+
+        mReviewScore.setText( realScore + "%");
+
+        if(realScore > 50){
+            mReviewImage.setImageResource(R.drawable.covid_icon);
+        }
+        else{
+            mReviewImage.setImageResource(R.drawable.ic_logo);
+        }
 
 
     }
