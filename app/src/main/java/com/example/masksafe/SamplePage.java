@@ -54,15 +54,23 @@ public class SamplePage extends AppCompatActivity {
 
         mReviewImage = (ImageView) findViewById(R.id.scoreImageView);
 
-        ReviewDBHandler review = new ReviewDBHandler(null);
+        ReviewDBHandler review = new ReviewDBHandler(this);
 
         List<Review> reviews = review.getReviews();
 
+        //Remove reviews that aren't related to the restaraunt
         for(int i = 0; i < reviews.size(); i++){
-            int score = reviews.get(i).getmScore();
-            reviewScore += score;
+            if(reviews.get(i).getmBusinessID() != 1){
+                reviews.remove(i);
+            }
         }
-        int realScore = reviewScore/reviews.size();
+
+        for(int i = 1; i < reviews.size(); i++){
+            int score = reviews.get(i).getmScore();
+            reviewScore += (score * 100);
+        }
+        int realScore = (reviewScore - 100)/reviews.size();
+
 
         mReviewScore.setText( realScore + "%");
 
@@ -81,6 +89,40 @@ public class SamplePage extends AppCompatActivity {
         Adding menu to page
 
      */
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        reviewScore = 0;
+
+        ReviewDBHandler review = new ReviewDBHandler(this);
+
+        List<Review> reviews = review.getReviews();
+
+        //Remove reviews that aren't related to the restaraunt
+        for(int i = 0; i < reviews.size(); i++){
+            if(reviews.get(i).getmBusinessID() != 1){
+                reviews.remove(i);
+            }
+        }
+
+        for(int i = 1; i < reviews.size(); i++){
+            int score = reviews.get(i).getmScore();
+            reviewScore += (score * 100);
+        }
+        int realScore = (reviewScore - 100)/reviews.size();
+
+
+        mReviewScore.setText( realScore + "%");
+
+        if(realScore > 50){
+            mReviewImage.setImageResource(R.drawable.covid_icon);
+        }
+        else{
+            mReviewImage.setImageResource(R.drawable.ic_logo);
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_mask_safe, menu);

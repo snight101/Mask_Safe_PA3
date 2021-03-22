@@ -62,7 +62,7 @@ public class reviewRecyclerView extends AppCompatActivity {
         //List<Review> reviews = dbHandler.getReviews();
 
 
-        ReviewDBHandler review = new ReviewDBHandler(null);
+        ReviewDBHandler review = new ReviewDBHandler(this);
 
         List<Review> reviews = review.getReviews();
 
@@ -139,4 +139,5 @@ public class reviewRecyclerView extends AppCompatActivity {
         super.onResume();
         myAdapter.notifyDataSetChanged();
     }
+
 }

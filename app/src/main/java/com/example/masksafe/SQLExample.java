@@ -28,7 +28,7 @@ public class SQLExample extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_s_q_l_example);
 
-        mIDTextView = (TextView)findViewById(R.id.reviewIDEditTextView);
+        mIDTextView = (EditText)findViewById(R.id.reviewEditText);
         mUserNameEditText = (EditText)findViewById(R.id.userNameEditText);
         mContentEditText = (EditText)findViewById(R.id.contentEditText);
 
@@ -93,27 +93,12 @@ public class SQLExample extends AppCompatActivity {
         }
     }
 
-    /*
-
-
-    // Take username and content and add it to Review Table
-    public void addButtonClick(View v){
-        String username = mUserNameEditText.getText().toString();
-        String content = mContentEditText.getText().toString();
-        Review review = new Review(username, content);
-
-        ReviewDBHandler handler = new ReviewDBHandler(this);
-        handler.addReview(review);
-
-        mUserNameEditText.setText("");
-        mContentEditText.setText("");
-
-        Toast.makeText(this, username + " was added to the database.", Toast.LENGTH_SHORT).show();
-    }
 
 
 
 
+
+/*
     // Find review by username and put their review ID and Content in appropriate fields
     public void findButtonClick(View v){
         String username = mUserNameEditText.getText().toString();
@@ -150,7 +135,8 @@ public class SQLExample extends AppCompatActivity {
 
     }
 
-     */
+
+ */
 
 
 }

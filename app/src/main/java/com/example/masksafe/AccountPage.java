@@ -43,7 +43,7 @@ public class AccountPage extends AppCompatActivity {
 
 
         //Get data
-        ReviewDBHandler review = new ReviewDBHandler(null);
+        ReviewDBHandler review = new ReviewDBHandler(this);
 
         List<Review> reviews = review.getReviews();
 

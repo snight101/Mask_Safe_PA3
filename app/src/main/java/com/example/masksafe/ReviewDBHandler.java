@@ -98,7 +98,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
     public void addReview(Review review){
         ContentValues myValues = new ContentValues();
 
-        myValues.put(COLUMN_REVIEWID, review.getmID());
+        //myValues.put(COLUMN_REVIEWID, review.getmID());
         myValues.put(COLUMN_CONTENT, review.getmContent());
         myValues.put(COLUMN_IMAGE, review.getmImage());
         myValues.put(COLUMN_SCORE, review.getmScore());
@@ -117,7 +117,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
         review_list = new ArrayList<Review>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] field = {COLUMN_REVIEWID, COLUMN_CONTENT, COLUMN_IMAGE, COLUMN_SCORE, COLUMN_USERID, COLUMN_BUSINESSNAME};
+        String[] field = {COLUMN_REVIEWID, COLUMN_CONTENT, COLUMN_IMAGE, COLUMN_SCORE, COLUMN_USERID, COLUMN_BUSINESSID};
         Cursor c = db.query(TABLE_REVIEW, field, null, null, null, null, null);
 
         int iReviewID = c.getColumnIndex(COLUMN_REVIEWID);
@@ -144,12 +144,12 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
 
 
-}
 
 
 
 
-    /*
+
+/*
     public Review findReview(String username){
         String sqlQuery = "SELECT  * FROM " + TABLE_REVIEW +
                 " WHERE " + COLUMN_USERNAME + " =\"" +
@@ -198,4 +198,6 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
     }
 
-     */
+ */
+
+}

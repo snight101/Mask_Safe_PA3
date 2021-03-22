@@ -7,29 +7,14 @@
     tools:context=".SQLExample">
 
     <TextView
-        android:id="@+id/reviewIDEditTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:layout_marginEnd="155dp"
-        android:layout_marginRight="155dp"
-        android:text="not assigned"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/reviewIDtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="74dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
         android:text="ReviewID:"
         android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/reviewIDEditTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,33 +49,17 @@
         app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
 
     <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="102dp"
-        android:onClick="addButtonClick"
-        android:text="Add"
-        app:backgroundTint="#2F9CCD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
-
-    <Button
         android:id="@+id/findButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="89dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginTop="102dp"
+        android:layout_marginEnd="176dp"
+        android:layout_marginRight="176dp"
         android:onClick="findButtonClick"
         android:text="Find"
         app:backgroundTint="#2F9CCD"
         app:layout_constraintEnd_toStartOf="@+id/deleteButton"
-        app:layout_constraintStart_toEndOf="@+id/addButton"
-        app:layout_constraintTop_toBottomOf="@+id/userNameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
 
     <Button
         android:id="@+id/deleteButton"
@@ -115,7 +84,19 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reviewIDEditTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/reviewEditText" />
+
+    <EditText
+        android:id="@+id/reviewEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginRight="53dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/userNameEditText"
