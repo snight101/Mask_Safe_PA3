@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class SQLExample extends AppCompatActivity {
     private TextView mIDTextView;
-    private EditText mUserNameEditText;
+    private EditText mUserIDEditText;
     private EditText mContentEditText;
 
 
@@ -29,7 +29,7 @@ public class SQLExample extends AppCompatActivity {
         setContentView(R.layout.activity_s_q_l_example);
 
         mIDTextView = (EditText)findViewById(R.id.reviewEditText);
-        mUserNameEditText = (EditText)findViewById(R.id.userNameEditText);
+        mUserIDEditText = (EditText)findViewById(R.id.userNameEditText);
         mContentEditText = (EditText)findViewById(R.id.contentEditText);
 
         ActionBar AB = getSupportActionBar();
@@ -98,45 +98,49 @@ public class SQLExample extends AppCompatActivity {
 
 
 
-/*
+
     // Find review by username and put their review ID and Content in appropriate fields
     public void findButtonClick(View v){
-        String username = mUserNameEditText.getText().toString();
+        String username = mUserIDEditText.getText().toString();
         ReviewDBHandler handler = new ReviewDBHandler(this);
 
-        Review review = handler.findReview(username);
+        Review review = handler.findReview(Integer.parseInt(username));
 
         if(review != null){
             mIDTextView.setText(String.valueOf(review.getmID()));
             mContentEditText.setText(review.getmContent());
+            mUserIDEditText.setText(review.getmUserID());
         }
         else{
             mIDTextView.setText("Student was not found.");
             mContentEditText.setText("");
+            mUserIDEditText.setText("");
         }
     }
+
+
     //find and delete review by user name
 
     public void deleteButtonClick(View v){
-        String username = mUserNameEditText.getText().toString();
+        String username = mIDTextView.getText().toString();
         ReviewDBHandler handler = new ReviewDBHandler(this);
 
         boolean result = handler.deleteReview(username);
 
         if(result){
-            mUserNameEditText.setText("");
+            mUserIDEditText.setText("");
             mContentEditText.setText("");
             mIDTextView.setText("Record Deleted");
         }
         else
         {
-            mIDTextView.setText("Review found");
+            mIDTextView.setText("Review not found");
         }
 
     }
 
 
- */
+
 
 
 }

@@ -149,11 +149,11 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
 
 
-/*
-    public Review findReview(String username){
+
+    public Review findReview(int userid){
         String sqlQuery = "SELECT  * FROM " + TABLE_REVIEW +
-                " WHERE " + COLUMN_USERNAME + " =\"" +
-                username + "\"";
+                " WHERE " + COLUMN_USERID + " =\"" +
+                userid + "\"";
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor myCursor = db.rawQuery(sqlQuery, null);
@@ -161,22 +161,36 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
         Review myReview = null;
 
         if(myCursor.moveToFirst()){
-            int tmpID = myCursor.getInt(0);
-            String tmpUserName = myCursor.getString(1);
-            String tmpContext = myCursor.getString(2);
+            int tmpReviewID = myCursor.getInt(0);
+            String tmpContext = myCursor.getString(1);
+            String tmpImage = myCursor.getString(2);
+            int tmpScore = myCursor.getInt(3);
+            int tmpUserID = myCursor.getInt(4);
+            int tmpBusinessID = myCursor.getInt(5);
             myCursor.close();
-            myReview = new Review(tmpID, tmpUserName, tmpContext);
+            myReview = new Review(tmpReviewID, tmpContext, tmpImage, tmpScore, tmpUserID, tmpBusinessID);
         }
         db.close();
         return  myReview;
     }
+     /*
+    public Review(int d, String c, String i, int e, int f, int g){
+        mID = d;
+        mContent = c;
+        mImage = i;
+        mScore = e;
+        mUserID = f;
+        mBusinessID = g;
+    }
 
-    public boolean deleteReview(String userName){
+     */
+
+    public boolean deleteReview(String reviewID){
         boolean result = false;
 
         String sqlQuery = "SELECT  * FROM " + TABLE_REVIEW +
-                " WHERE " + COLUMN_USERNAME + " =\"" +
-                userName + "\"";
+                " WHERE " + COLUMN_REVIEWID + " =\"" +
+                reviewID + "\"";
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor myCursor = db.rawQuery(sqlQuery, null);
@@ -198,6 +212,5 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
     }
 
- */
 
 }

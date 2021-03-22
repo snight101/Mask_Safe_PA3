@@ -8,6 +8,7 @@ public class Review {
     private int mUserID;
     private int mBusinessID;
 
+
     public Review(int d, String c, String i, int e, int f, int g){
         mID = d;
         mContent = c;
@@ -16,6 +17,8 @@ public class Review {
         mUserID = f;
         mBusinessID = g;
     }
+
+
 
     public Review(String c, String i, int e, int f, int g){
         mContent = c;
