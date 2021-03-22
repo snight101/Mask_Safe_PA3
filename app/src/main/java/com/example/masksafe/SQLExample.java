@@ -112,7 +112,7 @@ public class SQLExample extends AppCompatActivity {
             mUserIDEditText.setText(review.getmUserID());
         }
         else{
-            mIDTextView.setText("Student was not found.");
+            mIDTextView.setText("User was not found.");
             mContentEditText.setText("");
             mUserIDEditText.setText("");
         }
