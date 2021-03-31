@@ -101,10 +101,10 @@ public class SQLExample extends AppCompatActivity {
 
     // Find review by username and put their review ID and Content in appropriate fields
     public void findButtonClick(View v){
-        String username = mUserIDEditText.getText().toString();
+        String userID = mUserIDEditText.getText().toString();
         ReviewDBHandler handler = new ReviewDBHandler(this);
 
-        Review review = handler.findReview(Integer.parseInt(username));
+        Review review = handler.findReview(Integer.parseInt(userID));
 
         if(review != null){
             mIDTextView.setText(String.valueOf(review.getmID()));

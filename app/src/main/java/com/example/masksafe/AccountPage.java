@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -113,14 +114,12 @@ public class AccountPage extends AppCompatActivity {
      */
 
     public void accountSettingsButtonClick(View v){
-       //nothing in here as of yet. I don't know of any account settings I will be able to implement yet.
+        Toast.makeText(this,"Feature will be added soon.", Toast.LENGTH_LONG).show();
     }
 
 
 
     public void editProfileButtonClick(View v){
-        /*
-            I think I will be adding the ability to change both your user name and profile name
-         */
+        Toast.makeText(this,"Feature will be added soon.", Toast.LENGTH_LONG).show();
     }
 }
