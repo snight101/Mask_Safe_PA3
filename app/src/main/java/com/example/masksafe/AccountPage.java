@@ -46,16 +46,8 @@ public class AccountPage extends AppCompatActivity {
         //Get data
         ReviewDBHandler review = new ReviewDBHandler(this);
 
-        List<Review> reviews = review.getReviews();
+        List<Review> reviews = review.getMyReviews();
 
-        //Add recycler view for page
-
-        //For some reason this is glitched and won't remove certain reviews
-        for(int i = 0; i < reviews.size(); i++){
-            if(reviews.get(i).getmUserID() != 1){
-                reviews.remove(i);
-            }
-        }
 
         //Create recycler view
 
@@ -64,6 +56,29 @@ public class AccountPage extends AppCompatActivity {
         myAdapter2 = new ReviewRecyclerViewAdapter(reviews);
         rView.setAdapter(myAdapter2);
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ReviewDBHandler review = new ReviewDBHandler(this);
+
+        List<Review> reviews = review.getMyReviews();
+
+
+        RecyclerView rView = (RecyclerView)findViewById(R.id.accountRecyclerView);
+        rView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter2 = new ReviewRecyclerViewAdapter(reviews);
+        rView.setAdapter(myAdapter2);
+
+
+
+    }
+
+
+
+
 
     /*
 

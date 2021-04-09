@@ -91,20 +91,10 @@ public class SamplePage extends AppCompatActivity {
 
     }
 
-    /*
-
-        Adding menu to page
-
-     */
-
 
     @Override
     public void onResume() {
         super.onResume();
-
-        myAdapter.notifyDataSetChanged();
-
-        reviewScore = 0;
 
         ReviewDBHandler review = new ReviewDBHandler(this);
 
@@ -116,6 +106,14 @@ public class SamplePage extends AppCompatActivity {
                 reviews.remove(i);
             }
         }
+        RecyclerView rView = (RecyclerView)findViewById(R.id.recyclerView);
+        rView.setLayoutManager(new LinearLayoutManager(this));
+        myAdapter = new ReviewRecyclerViewAdapter(reviews);
+        rView.setAdapter(myAdapter);
+
+        reviewScore = 0;
+
+
 
         for(int i = 1; i < reviews.size(); i++){
             int score = reviews.get(i).getmScore();
@@ -133,18 +131,23 @@ public class SamplePage extends AppCompatActivity {
             mReviewImage.setImageResource(R.drawable.ic_logo);
         }
 
-        /*
-            Recycler View creation
-         */
-
-
-
     }
+
+        /*
+
+        Adding menu to page
+
+     */
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_mask_safe, menu);
         return true;
     }
+
+
     //Menu commands
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

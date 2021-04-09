@@ -2,17 +2,29 @@ package com.example.masksafe;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 // I did not have time to finish the landscape view on this page as I could not figure it out
 
@@ -25,6 +37,15 @@ public class SubmitReview extends AppCompatActivity {
     private EditText mEnterReview;
     private Boolean mScore;
     private int score;
+    private ImageButton mImageButton;
+
+    //Adding ability to take photos
+    private static final int IMAGE_CAPTURE = 102;
+    private static final int MEDIA_TYPE_IMAGE = 1;
+    private static Uri fileUri;
+    private static Context context;
+    private TextView errorMSG;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +53,9 @@ public class SubmitReview extends AppCompatActivity {
         setContentView(R.layout.activity_submit_review);
 
         mEnterReview = (EditText) findViewById(R.id.enterReview);
+        errorMSG = (TextView) findViewById(R.id.errorMSG);
+        context = getApplicationContext();
+        mImageButton = (ImageButton) findViewById(R.id.enterImage);
 
         ActionBar AB = getSupportActionBar();
         AB.setTitle("Mask Safe");
@@ -47,6 +71,10 @@ public class SubmitReview extends AppCompatActivity {
         AB.setDisplayShowHomeEnabled(true);
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
+
+
+        errorMSG.setText("state: " + Environment.getExternalStorageState());
+
     }
 
     /*
@@ -121,11 +149,68 @@ public class SubmitReview extends AppCompatActivity {
         }
 
         //These will be more specific and customizeable once the google API is added
-        Review review = new Review(content, null, score, 1, 1);
+        Review review = new Review(content, fileUri.toString(), score, 1, 1);
 
         ReviewDBHandler handler = new ReviewDBHandler(this);
         handler.addReview(review);
         mEnterReview.setText("");
 
     }
+
+    private  static File getOutputMediaFile(int type){
+        File myDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "MyCameraApp");
+        if(!myDir.exists()){
+            if(!myDir.mkdirs()){
+                Log.d("MyCameraApp", "failed to create directory");
+                return null;
+            }
+        }
+        String myTimeStamp = new SimpleDateFormat( "yyyMMdd_HHmmss").format(new Date());
+        File myMediaFile;
+        if(type == MEDIA_TYPE_IMAGE){
+            myMediaFile = new File( myDir.getPath() + File.separator + "IMG_" + myTimeStamp + ".jpg");
+        }
+        else{
+            return null;
+        }
+        return myMediaFile;
+    }
+
+    private static Uri getOutMediaFileUri(int type){
+        Uri URI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", getOutputMediaFile(type));
+        return URI;
+    }
+
+
+
+    public void enterImageButtonClick(View v){
+        try {
+            Intent myIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            fileUri = getOutMediaFileUri(MEDIA_TYPE_IMAGE);
+            errorMSG.setText(errorMSG.getText() + "\nfileURI: " + fileUri.getPath());
+            myIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            startActivityForResult(myIntent, IMAGE_CAPTURE);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == IMAGE_CAPTURE){
+            if(resultCode == RESULT_OK){
+                mImageButton.setImageURI(fileUri);
+                Toast.makeText(this,"Image returned", Toast.LENGTH_LONG).show();
+            }
+            else if(resultCode == RESULT_CANCELED){
+                Toast.makeText(this,"Capture Canceled.", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(this,"Failed to capture image.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
 }

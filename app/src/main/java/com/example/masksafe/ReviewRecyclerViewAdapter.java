@@ -1,6 +1,7 @@
 package com.example.masksafe;
 
 import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +114,19 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
             viewHolder.getmReviewScore().setImageResource(R.drawable.ic_logo);
         }
         //Once we can take pictures using the app this will change
-        viewHolder.getmReviewImage().setImageResource(R.drawable.picupload);
+        if(mReviewData.get(position).getmImage() == null){
+            viewHolder.getmReviewImage().setImageResource(R.drawable.picupload);
+        }
+        else if(mReviewData.get(position).getmImage() == "null"){
+            viewHolder.getmReviewImage().setImageResource(R.drawable.picupload);
+        }
+        else{
+            viewHolder.getmReviewImage().setImageURI(Uri.parse(mReviewData.get(position).getmImage()));
+        }
+
+
+
+
 
     }
 

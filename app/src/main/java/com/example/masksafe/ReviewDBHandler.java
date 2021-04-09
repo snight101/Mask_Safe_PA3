@@ -141,6 +141,36 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
         return review_list;
     }
 
+    public List<Review> getMyReviews(){
+
+        review_list = new ArrayList<Review>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] field = {COLUMN_REVIEWID, COLUMN_CONTENT, COLUMN_IMAGE, COLUMN_SCORE, COLUMN_USERID, COLUMN_BUSINESSID};
+        Cursor c = db.query(TABLE_REVIEW, field, null, null, null, null, null);
+
+        int iReviewID = c.getColumnIndex(COLUMN_REVIEWID);
+        int iContent = c.getColumnIndex(COLUMN_CONTENT);
+        int iImage = c.getColumnIndex(COLUMN_IMAGE);
+        int iScore = c.getColumnIndex(COLUMN_SCORE);
+        int iUserID = c.getColumnIndex(COLUMN_USERID);
+        int iBusinessID = c.getColumnIndex(COLUMN_BUSINESSID);
+
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+            int reviewID = c.getInt(iReviewID);
+            String content = c.getString(iContent);
+            String image = c.getString(iImage);
+            int score = c.getInt(iScore);
+            int userID = c.getInt(iUserID);
+            int businessID = c.getInt(iBusinessID);
+            if( userID == 1) {
+                review_list.add(new Review(reviewID, content, image, score, userID, businessID));
+            }
+
+        }
+
+        return review_list;
+    }
+
 
 
 

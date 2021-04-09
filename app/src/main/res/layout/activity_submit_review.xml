@@ -31,7 +31,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="45dp"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:onClick="maskButtonClick"
@@ -76,7 +76,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/maskButton" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/enterImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -86,10 +86,32 @@
         android:layout_marginEnd="106dp"
         android:layout_marginRight="106dp"
         android:layout_marginBottom="151dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:onClick="enterImageButtonClick"
+        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterReview"
         app:srcCompat="@drawable/picupload" />
+
+
+    <TextView
+        android:id="@+id/errorMSG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:text="TextView"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
