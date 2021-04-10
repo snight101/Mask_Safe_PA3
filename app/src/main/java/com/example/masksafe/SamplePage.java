@@ -69,11 +69,14 @@ public class SamplePage extends AppCompatActivity {
             }
         }
 
+        //Calculate review score
+
         for(int i = 1; i < reviews.size(); i++){
             int score = reviews.get(i).getmScore();
             reviewScore += (score * 100);
         }
-        int realScore = (reviewScore - 100)/reviews.size();
+        int realScore = (reviewScore + 100)/(reviews.size() + 1);
+
 
 
         mReviewScore.setText( realScore + "%");
@@ -139,7 +142,7 @@ public class SamplePage extends AppCompatActivity {
             int score = reviews.get(i).getmScore();
             reviewScore += (score * 100);
         }
-        int realScore = (reviewScore - 100)/reviews.size();
+        int realScore = (reviewScore + 100)/(reviews.size() + 1);
 
 
         mReviewScore.setText( realScore + "%");
