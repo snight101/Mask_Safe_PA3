@@ -69,7 +69,7 @@ public class SamplePage extends AppCompatActivity {
             }
         }
 
-        //Calculate review score
+        //Calculate review score for page
 
         for(int i = 1; i < reviews.size(); i++){
             int score = reviews.get(i).getmScore();
