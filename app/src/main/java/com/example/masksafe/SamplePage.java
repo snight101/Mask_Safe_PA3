@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class SamplePage extends AppCompatActivity {
     private TextView mReviewScore;
     private ImageView mReviewImage;
     ReviewRecyclerViewAdapter myAdapter;
+    private VideoView mVideo;
 
 
 
@@ -87,6 +90,23 @@ public class SamplePage extends AppCompatActivity {
         rView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new ReviewRecyclerViewAdapter(reviews);
         rView.setAdapter(myAdapter);
+
+        //get Business list
+        List<Business> businesses = review.getBusinesses();
+
+
+
+        //Add video to page
+        //Set video view
+        mVideo = (VideoView) findViewById(R.id.videoView);
+        mVideo.setVideoPath(businesses.get(0).getmVideo());
+
+        //Set media Controller
+        MediaController myMediaController = new MediaController(this);
+        myMediaController.setAnchorView(mVideo);
+        mVideo.setMediaController(myMediaController);
+
+        mVideo.start();
 
 
     }

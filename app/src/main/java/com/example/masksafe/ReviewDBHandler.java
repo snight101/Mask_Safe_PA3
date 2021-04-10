@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDBHandler extends SQLiteOpenHelper  {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public List<Review> review_list;
+    public List<Business> business_list;
 
     //
-    private static final String DATABASE_NAME = "reviewDB.db";
+    private static final String DATABASE_NAME = "reviewDB2.db";
     //Tables
     private static final String TABLE_REVIEW = "Reviews";
     private static final String TABLE_USERS = "Users";
@@ -37,6 +38,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
     //Businesses rows
     private static final String COLUMN_BUSINESSNAME = "business_name";
+    private static final String COLUMN_VIDEO = "video";
     private static final String COLUMN_ADDRESS = "address";
     private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_API = "api_key";
@@ -76,6 +78,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
                 COLUMN_BUSINESSID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_BUSINESSNAME + " TEXT, " +
                 COLUMN_ADDRESS + " TEXT, " +
+                COLUMN_VIDEO + " TEXT, " +
                 COLUMN_RATING + " FLOAT, " +
                 COLUMN_API + " TEXT)";
 
@@ -111,7 +114,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
     }
 
-    //Method that would possibly return a list of all the Reviews
+    //Method that returns a list of all the Reviews
     //I tried using the code from https://stackoverflow.com/questions/44656025/getting-data-from-sqlite-using-custom-object-arraylist
     public List<Review> getReviews(){
 
@@ -169,6 +172,36 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
         }
 
         return review_list;
+    }
+
+
+    //Method that returns a list of all the Businesses
+    public List<Business> getBusinesses(){
+
+        business_list = new ArrayList<Business>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] field = {COLUMN_BUSINESSID, COLUMN_BUSINESSNAME, COLUMN_ADDRESS, COLUMN_VIDEO, COLUMN_RATING, COLUMN_API};
+        Cursor c = db.query(TABLE_BUSINESSES, field, null, null, null, null, null);
+
+        int iBusinessID = c.getColumnIndex(COLUMN_BUSINESSID);
+        int iBusinessName = c.getColumnIndex(COLUMN_BUSINESSNAME);
+        int iAddress = c.getColumnIndex(COLUMN_ADDRESS);
+        int iVideo = c.getColumnIndex(COLUMN_VIDEO);
+        int iRating = c.getColumnIndex(COLUMN_RATING);
+        int iApi = c.getColumnIndex(COLUMN_API);
+
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+            int businessID = c.getInt(iBusinessID);
+            String businessName = c.getString(iBusinessName);
+            String address = c.getString(iAddress);
+            String video = c.getString(iVideo);
+            Float rating = c.getFloat(iRating);
+            String api = c.getString(iApi);
+            business_list.add(new Business(businessID, businessName, address, video, rating, api));
+
+        }
+
+        return business_list;
     }
 
 
