@@ -75,7 +75,7 @@ public class SamplePage extends AppCompatActivity {
             int score = reviews.get(i).getmScore();
             reviewScore += (score * 100);
         }
-        int realScore = (reviewScore + 100)/(reviews.size() + 1);
+        int realScore = (reviewScore + 100)/(reviews.size());
 
 
 
@@ -142,7 +142,7 @@ public class SamplePage extends AppCompatActivity {
             int score = reviews.get(i).getmScore();
             reviewScore += (score * 100);
         }
-        int realScore = (reviewScore + 100)/(reviews.size() + 1);
+        int realScore = (reviewScore + 100)/(reviews.size());
 
 
         mReviewScore.setText( realScore + "%");
