@@ -2,13 +2,18 @@ package com.example.masksafe;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.util.List;
@@ -122,10 +128,6 @@ public class SamplePage extends AppCompatActivity {
         }
 
 
-
-
-
-
         //Add video to page
         //Set video view
         mVideo = (VideoView) findViewById(R.id.videoView);
@@ -137,6 +139,18 @@ public class SamplePage extends AppCompatActivity {
         mVideo.setMediaController(myMediaController);
 
         mVideo.start();
+
+        //SMS permissions
+        int SMS_PERMISSION_REQ_CODE_SUBMIT = 101;
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECEIVE_SMS)
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.SEND_SMS)
+                        != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SamplePage.this, new String[] {Manifest.permission.RECEIVE_SMS},
+                    SMS_PERMISSION_REQ_CODE_SUBMIT);
+            ActivityCompat.requestPermissions(SamplePage.this, new String[] {Manifest.permission.SEND_SMS},
+                    SMS_PERMISSION_REQ_CODE_SUBMIT);
+        }
 
 
     }
@@ -248,6 +262,32 @@ public class SamplePage extends AppCompatActivity {
             myIntent.putExtra(KEY_PAGE, mPageNum);
         }
         startActivity(myIntent);
+    }
+
+    //Command to send SMS
+    public void getInfoButtonClick(View v){
+
+        ReviewDBHandler review = new ReviewDBHandler(this);
+
+        //get Business list
+        List<Business> businesses = review.getBusinesses();
+
+        if(businesses.get(mPageNum).getmWebsite() != null) {
+            SmsManager smsManager = SmsManager.getDefault();
+            String message = businesses.get(mPageNum).getmWebsite();
+
+            try {
+                smsManager.sendTextMessage("5556", null, message, null, null);
+                Toast.makeText(this,"Message Sent.", Toast.LENGTH_LONG).show();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(this,"ERROR.", Toast.LENGTH_LONG).show();
+            }
+        }
+        else{
+            Toast.makeText(this,"Please enter both phone number and message.", Toast.LENGTH_LONG).show();
+        }
     }
 
 

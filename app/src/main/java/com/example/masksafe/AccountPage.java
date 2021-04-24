@@ -70,7 +70,12 @@ public class AccountPage extends AppCompatActivity {
         RecyclerView rView = (RecyclerView)findViewById(R.id.accountRecyclerView);
         rView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter2 = new ReviewRecyclerViewAdapter(reviews);
-        rView.setAdapter(myAdapter2);
+        try {
+            rView.setAdapter(myAdapter2);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
 
 

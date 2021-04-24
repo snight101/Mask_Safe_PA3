@@ -132,12 +132,11 @@ public class SubmitReview extends AppCompatActivity {
         }
     }
 
-    // For some reason these functions do not work
+   //Next two functions set the score for the review
     public void maskButtonClick(View v){
         Toast.makeText(this,"You have determined this establishment pandemic friendly.", Toast.LENGTH_LONG).show();
         mScore = true;
         mEnterReview.setText("");
-
     }
 
     public void virusButtonClick(View v){
@@ -147,10 +146,11 @@ public class SubmitReview extends AppCompatActivity {
     }
 
 
-
+    //Submit review into the database
     public void submitReviewButtonClick(View v){
         String content = mEnterReview.getText().toString();
 
+        //Set score
         if(mScore){
             score = 1;
         }
@@ -158,13 +158,14 @@ public class SubmitReview extends AppCompatActivity {
             score = 0;
         }
 
-        //These will be more specific and customizeable once the google API is added
+        //Submit review
         Review review = new Review(content, fileUri.toString(), score, 1, mPageNum);
 
         ReviewDBHandler handler = new ReviewDBHandler(this);
         handler.addReview(review);
         mEnterReview.setText("");
         mImageButton.setImageResource(picupload);
+        errorMSG.setText("");
 
     }
 
