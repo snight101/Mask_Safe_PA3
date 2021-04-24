@@ -42,6 +42,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
     private static final String COLUMN_ADDRESS = "address";
     private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_API = "api_key";
+    private static final String COLUMN_WEBSITE = "website";
 
 
     public ReviewDBHandler(Context c){
@@ -80,7 +81,8 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
                 COLUMN_ADDRESS + " TEXT, " +
                 COLUMN_VIDEO + " TEXT, " +
                 COLUMN_RATING + " FLOAT, " +
-                COLUMN_API + " TEXT)";
+                COLUMN_API + " TEXT, " +
+                COLUMN_WEBSITE + " TEXT)";
 
         //Create Tables in sql
         db.execSQL(CREATE_BUSINESSES_TABLE);
@@ -182,7 +184,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
         business_list = new ArrayList<Business>();
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] field = {COLUMN_BUSINESSID, COLUMN_BUSINESSNAME, COLUMN_ADDRESS, COLUMN_VIDEO, COLUMN_RATING, COLUMN_API};
+        String[] field = {COLUMN_BUSINESSID, COLUMN_BUSINESSNAME, COLUMN_ADDRESS, COLUMN_VIDEO, COLUMN_RATING, COLUMN_API, COLUMN_WEBSITE};
         Cursor c = db.query(TABLE_BUSINESSES, field, null, null, null, null, null);
 
         int iBusinessID = c.getColumnIndex(COLUMN_BUSINESSID);
@@ -191,6 +193,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
         int iVideo = c.getColumnIndex(COLUMN_VIDEO);
         int iRating = c.getColumnIndex(COLUMN_RATING);
         int iApi = c.getColumnIndex(COLUMN_API);
+        int iWebsite = c.getColumnIndex(COLUMN_WEBSITE);
 
         for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
             int businessID = c.getInt(iBusinessID);
@@ -199,7 +202,8 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
             String video = c.getString(iVideo);
             Float rating = c.getFloat(iRating);
             String api = c.getString(iApi);
-            business_list.add(new Business(businessID, businessName, address, video, rating, api));
+            String website = c.getString(iWebsite);
+            business_list.add(new Business(businessID, businessName, address, video, rating, api, website));
 
         }
 

@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         // Add a marker in Luddy and move the camera
-        LatLng bloomCafe = new LatLng(39.17264696709298, -86.52253708064691);
+        LatLng bloomCafe = new LatLng(39.15337127562186, -86.52960918190149);
         Marker1 = mMap.addMarker(new MarkerOptions().position(bloomCafe).title("Bloomington Café"));
 
 
@@ -75,8 +75,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Marker2 = mMap.addMarker(new MarkerOptions().position(bubsBur).title("Bub's Burgers"));
 
         //Add another marker
-        LatLng art = new LatLng(39.16955279330485, -86.51871761486917);
-        mMap.addMarker(new MarkerOptions().position(art).title("Department of Art History"));
+        LatLng owl = new LatLng(39.167820845495136, -86.53456315403817);
+        Marker3 = mMap.addMarker(new MarkerOptions().position(owl).title("Owlery"));
+
+        //Add another marker
+        LatLng malibu = new LatLng(39.16702230726966, -86.53317913422094);
+        Marker4 = mMap.addMarker(new MarkerOptions().position(malibu).title("Malibu Grill"));
+
+        //Add another marker
+        LatLng juan = new LatLng(39.166972398329555, -86.54023870817224);
+        Marker5 = mMap.addMarker(new MarkerOptions().position(juan).title("Juannita's"));
+
+        //Add another marker
+        LatLng threeAmigos = new LatLng(39.17197354436211, -86.53507880680144);
+        Marker6 = mMap.addMarker(new MarkerOptions().position(threeAmigos).title("The 3 Amigos"));
+
+        //Add another marker
+        LatLng upland = new LatLng(39.17364535573402, -86.5371602009361);
+        Marker7 = mMap.addMarker(new MarkerOptions().position(upland).title("Upland Brewery"));
+
+        //Add another marker
+        LatLng dom = new LatLng(39.17501770845756, -86.5333836507372);
+        Marker8 = mMap.addMarker(new MarkerOptions().position(dom).title("Domino's Pizza"));
+
+        //Add another marker
+        LatLng starbucks = new LatLng(39.16636727990499, -86.526989264451);
+        Marker9 = mMap.addMarker(new MarkerOptions().position(starbucks).title("Starbucks"));
+
+        //Add another marker
+        LatLng taste = new LatLng(39.165527133535896, -86.52997188080126);
+        Marker10 = mMap.addMarker(new MarkerOptions().position(taste).title("Taste of India"));
 
         //Create default camera position
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -103,7 +131,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             else{
                 Marker1.showInfoWindow();
+
                 pressed = true;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = false;
             }
         }
         //If statement for marker 2
@@ -121,10 +159,244 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             else{
                 Marker2.showInfoWindow();
+
+                pressed = false;
                 pressedTwo = true;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = false;
             }
         }
 
+        //If statement for marker 3
+        if (marker.equals(Marker3)){
+            if(pressedThree){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 3;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedThree = false;
+            }
+            else{
+                Marker3.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = true;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = false;
+            }
+        }
+        //If statement for marker 4
+        if (marker.equals(Marker4)){
+            if(pressedFour){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 4;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedFour = false;
+            }
+            else{
+                Marker4.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = true;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = false;
+            }
+        }
+        //If statement for marker 5
+        if (marker.equals(Marker5)){
+            if(pressedFive){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 5;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedFive = false;
+            }
+            else{
+                Marker5.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = true;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = false;
+            }
+        }
+        //If statement for marker 6
+        if (marker.equals(Marker6)){
+            if(pressedSix){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 6;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedSix = false;
+            }
+            else{
+                Marker6.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = true;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = false;
+            }
+        }
+        //If statement for marker 7
+        if (marker.equals(Marker7)){
+            if(pressedSeven){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 7;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedSeven = false;
+            }
+            else{
+                Marker7.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = true;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = false;
+            }
+        }
+        //If statement for marker 8
+        if (marker.equals(Marker8)){
+            if(pressedEight){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 8;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedEight = false;
+            }
+            else{
+                Marker8.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = true;
+                pressedNine = false;
+                pressedTen = false;
+            }
+        }
+        //If statement for marker 9
+        if (marker.equals(Marker9)){
+            if(pressedNine){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 9;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedNine = false;
+            }
+            else{
+                Marker9.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = true;
+                pressedTen = false;
+            }
+        }
+        //If statement for marker 10
+        if (marker.equals(Marker10)){
+            if(pressedTen){
+                Intent myIntent = new Intent(this, SamplePage.class);
+                //using flags to make sure im not spamming intents
+                if(USE_FLAG){
+                    myIntent.addFlags(mFlag);
+                    mPageNum = 10;
+                    myIntent.putExtra(KEY_PAGE, mPageNum);
+                }
+                startActivity(myIntent);
+                pressedTen = false;
+            }
+            else{
+                Marker10.showInfoWindow();
+
+                pressed = false;
+                pressedTwo = false;
+                pressedThree = false;
+                pressedFour = false;
+                pressedFive = false;
+                pressedSix = false;
+                pressedSeven = false;
+                pressedEight = false;
+                pressedNine = false;
+                pressedTen = true;
+            }
+        }
         return true;
     }
 }

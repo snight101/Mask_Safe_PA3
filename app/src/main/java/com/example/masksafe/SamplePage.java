@@ -114,7 +114,13 @@ public class SamplePage extends AppCompatActivity {
         RecyclerView rView = (RecyclerView)findViewById(R.id.recyclerView);
         rView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new ReviewRecyclerViewAdapter(reviews);
-        rView.setAdapter(myAdapter);
+        try {
+            rView.setAdapter(myAdapter);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
 
 
 
@@ -154,7 +160,12 @@ public class SamplePage extends AppCompatActivity {
         RecyclerView rView = (RecyclerView)findViewById(R.id.recyclerView);
         rView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new ReviewRecyclerViewAdapter(reviews);
-        rView.setAdapter(myAdapter);
+        try {
+            rView.setAdapter(myAdapter);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
         reviewScore = 0;
 

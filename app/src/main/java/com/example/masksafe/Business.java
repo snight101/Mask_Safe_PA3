@@ -7,24 +7,27 @@ public class Business {
     private String mVideo;
     private Float mRating;
     private String mApi;
+    private String mWebsite;
 
 
 
-    public Business(int d, String n, String a, String v, Float r, String p){
+    public Business(int d, String n, String a, String v, Float r, String p, String w){
         mID = d;
         mName = n;
         mAddress = a;
         mVideo = v;
         mRating = r;
         mApi = p;
+        mWebsite = w;
     }
 
-    public Business(String n, String a, String v, Float r, String p){
+    public Business(String n, String a, String v, Float r, String p, String w){
         mName = n;
         mAddress = a;
         mVideo = v;
         mRating = r;
         mApi = p;
+        mWebsite = w;
     }
 
     public int getmID() {
@@ -73,5 +76,13 @@ public class Business {
 
     public void setmApi(String mApi) {
         this.mApi = mApi;
+    }
+
+    public String getmWebsite() {
+        return mWebsite;
+    }
+
+    public void setmWebsite(String mWebsite) {
+        this.mWebsite = mWebsite;
     }
 }
