@@ -75,7 +75,7 @@ public class SQLExample extends AppCompatActivity {
                 startActivity(myIntent);
                 return true;
             case R.id.mapButton:
-                Intent myIntent2 = new Intent(this, MainActivity.class);
+                Intent myIntent2 = new Intent(this, MapsActivity.class);
                 if(USE_FLAG){
                     myIntent2.addFlags(mFlag);
                 }

@@ -22,10 +22,17 @@ import java.util.List;
 
 public class SamplePage extends AppCompatActivity {
 
+    //Flag and key related
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+    private static final String KEY_PAGE = "page number";
+    private int mPageNum;
+
+    //views and review related
     private int reviewScore = 0;
     private TextView mReviewScore;
+    private TextView mCompanyTitle;
+    private TextView mAddress;
     private ImageView mReviewImage;
     ReviewRecyclerViewAdapter myAdapter;
     private VideoView mVideo;
@@ -36,6 +43,10 @@ public class SamplePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_page);
+
+        //Recieve Key from map page
+        Bundle mydata = getIntent().getExtras();
+        mPageNum = mydata.getInt(KEY_PAGE);
 
         ActionBar AB = getSupportActionBar();
         AB.setTitle("Mask Safe");
@@ -52,7 +63,11 @@ public class SamplePage extends AppCompatActivity {
         AB.setDisplayUseLogoEnabled(true);
         AB.setLogo(R.drawable.ic_logo);
 
-        //Set review score for page
+        //Set views for page
+
+        mCompanyTitle = (TextView) findViewById(R.id.companyTitleTextView);
+
+        mAddress = (TextView) findViewById(R.id.addressTextView);
 
         mReviewScore = (TextView)findViewById(R.id.percentageTextView);
 
@@ -60,33 +75,40 @@ public class SamplePage extends AppCompatActivity {
 
         ReviewDBHandler review = new ReviewDBHandler(this);
 
-        List<Review> reviews = review.getReviews();
+        //get review list
+        List<Review> reviews = review.getReviews(mPageNum);
 
-        //Remove reviews that aren't related to the restaraunt
-        for(int i = 0; i < reviews.size(); i++){
-            if(reviews.get(i).getmBusinessID() != 1){
-                reviews.remove(i);
+        //get Business list
+        List<Business> businesses = review.getBusinesses();
+
+        //Set company title and address
+        for(int i = 1; i < businesses.size(); i++){
+            if(businesses.get(i).getmID() == mPageNum){
+                mCompanyTitle.setText(businesses.get(i).getmName());
+                mAddress.setText(businesses.get(i).getmAddress());
             }
         }
 
+
         //Calculate review score for page
 
-        for(int i = 1; i < reviews.size(); i++){
+        for(int i = 0; i < reviews.size(); i++){
             int score = reviews.get(i).getmScore();
             reviewScore += (score * 100);
         }
-        int realScore = (reviewScore + 100)/(reviews.size());
-
-
+        int realScore = reviewScore/(reviews.size());
 
         mReviewScore.setText( realScore + "%");
 
+        //Set score image
         if(realScore > 50){
             mReviewImage.setImageResource(R.drawable.covid_icon);
         }
         else{
             mReviewImage.setImageResource(R.drawable.ic_logo);
         }
+
+
         //Create recycler view
 
         RecyclerView rView = (RecyclerView)findViewById(R.id.recyclerView);
@@ -94,8 +116,7 @@ public class SamplePage extends AppCompatActivity {
         myAdapter = new ReviewRecyclerViewAdapter(reviews);
         rView.setAdapter(myAdapter);
 
-        //get Business list
-        List<Business> businesses = review.getBusinesses();
+
 
 
 
@@ -115,20 +136,21 @@ public class SamplePage extends AppCompatActivity {
     }
 
 
+
+
     @Override
     public void onResume() {
         super.onResume();
 
+        //Recieve Key from map page
+        Bundle mydata = getIntent().getExtras();
+        mPageNum = mydata.getInt(KEY_PAGE);
+
         ReviewDBHandler review = new ReviewDBHandler(this);
 
-        List<Review> reviews = review.getReviews();
+        List<Review> reviews = review.getReviews(mPageNum);
 
-        //Remove reviews that aren't related to the restaraunt
-        for(int i = 0; i < reviews.size(); i++){
-            if(reviews.get(i).getmBusinessID() != 1){
-                reviews.remove(i);
-            }
-        }
+
         RecyclerView rView = (RecyclerView)findViewById(R.id.recyclerView);
         rView.setLayoutManager(new LinearLayoutManager(this));
         myAdapter = new ReviewRecyclerViewAdapter(reviews);
@@ -137,15 +159,18 @@ public class SamplePage extends AppCompatActivity {
         reviewScore = 0;
 
 
+        //Calculate review score for page
 
-        for(int i = 1; i < reviews.size(); i++){
+        for(int i = 0; i < reviews.size(); i++){
             int score = reviews.get(i).getmScore();
             reviewScore += (score * 100);
         }
-        int realScore = (reviewScore + 100)/(reviews.size());
+        int realScore = reviewScore/(reviews.size());
 
 
         mReviewScore.setText( realScore + "%");
+
+        //Set score image
 
         if(realScore > 50){
             mReviewImage.setImageResource(R.drawable.covid_icon);
@@ -187,7 +212,7 @@ public class SamplePage extends AppCompatActivity {
                 startActivity(myIntent);
                 return true;
             case R.id.mapButton:
-                Intent myIntent2 = new Intent(this, MainActivity.class);
+                Intent myIntent2 = new Intent(this, MapsActivity.class);
                 if(USE_FLAG){
                     myIntent2.addFlags(mFlag);
                 }
@@ -209,6 +234,7 @@ public class SamplePage extends AppCompatActivity {
         Intent myIntent = new Intent(this, SubmitReview.class);
         if(USE_FLAG){
             myIntent.addFlags(mFlag);
+            myIntent.putExtra(KEY_PAGE, mPageNum);
         }
         startActivity(myIntent);
     }

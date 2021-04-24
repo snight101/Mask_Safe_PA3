@@ -26,14 +26,20 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.example.masksafe.R.drawable.picupload;
+
 // I did not have time to finish the landscape view on this page as I could not figure it out
 
 
 public class SubmitReview extends AppCompatActivity {
 
+    //Flag and key related
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
+    private static final String KEY_PAGE = "page number";
+    private int mPageNum;
 
+    //View and score related
     private EditText mEnterReview;
     private Boolean mScore;
     private int score;
@@ -51,6 +57,10 @@ public class SubmitReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_review);
+
+        //Recieve key
+        Bundle mydata = getIntent().getExtras();
+        mPageNum = mydata.getInt(KEY_PAGE);
 
         mEnterReview = (EditText) findViewById(R.id.enterReview);
         errorMSG = (TextView) findViewById(R.id.errorMSG);
@@ -104,7 +114,7 @@ public class SubmitReview extends AppCompatActivity {
                 startActivity(myIntent);
                 return true;
             case R.id.mapButton:
-                Intent myIntent2 = new Intent(this, MainActivity.class);
+                Intent myIntent2 = new Intent(this, MapsActivity.class);
                 if(USE_FLAG){
                     myIntent2.addFlags(mFlag);
                 }
@@ -149,11 +159,12 @@ public class SubmitReview extends AppCompatActivity {
         }
 
         //These will be more specific and customizeable once the google API is added
-        Review review = new Review(content, fileUri.toString(), score, 1, 1);
+        Review review = new Review(content, fileUri.toString(), score, 1, mPageNum);
 
         ReviewDBHandler handler = new ReviewDBHandler(this);
         handler.addReview(review);
         mEnterReview.setText("");
+        mImageButton.setImageResource(picupload);
 
     }
 

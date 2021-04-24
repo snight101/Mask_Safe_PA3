@@ -116,7 +116,7 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
     //Method that returns a list of all the Reviews
     //I tried using the code from https://stackoverflow.com/questions/44656025/getting-data-from-sqlite-using-custom-object-arraylist
-    public List<Review> getReviews(){
+    public List<Review> getReviews(int i){
 
         review_list = new ArrayList<Review>();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -137,7 +137,9 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
             int score = c.getInt(iScore);
             int userID = c.getInt(iUserID);
             int businessID = c.getInt(iBusinessID);
-            review_list.add(new Review(reviewID, content, image, score, userID, businessID));
+            if( businessID == i) {
+                review_list.add(new Review(reviewID, content, image, score, userID, businessID));
+            }
 
         }
 
