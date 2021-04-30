@@ -147,7 +147,13 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
             viewHolder.getmReviewImage().setImageResource(R.drawable.picupload);
         }
         else{
-            viewHolder.getmReviewImage().setImageURI(Uri.parse(mReviewData.get(position).getmImage()));
+            try {
+                viewHolder.getmReviewImage().setImageURI(Uri.parse(mReviewData.get(position).getmImage()));
+            }
+            catch(Exception e){
+                viewHolder.getmReviewImage().setImageResource(R.drawable.picupload);
+                e.printStackTrace();
+            }
         }
 
 
