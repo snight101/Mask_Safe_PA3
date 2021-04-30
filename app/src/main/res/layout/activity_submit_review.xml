@@ -51,7 +51,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginBottom="47dp"
         android:onClick="virusButtonClick"
-        app:backgroundTint="#2F9CCD"
+        app:backgroundTint="#DC143C"
         app:icon="@drawable/ic_logo"
         app:layout_constraintBottom_toTopOf="@+id/enterReview"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,17 +101,5 @@
         app:layout_constraintTop_toBottomOf="@+id/enterReview"
         app:srcCompat="@drawable/picupload" />
 
-
-    <TextView
-        android:id="@+id/errorMSG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="18dp"
-        android:text="TextView"
-        android:textSize="8sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

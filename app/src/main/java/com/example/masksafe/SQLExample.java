@@ -20,6 +20,7 @@ public class SQLExample extends AppCompatActivity {
     private EditText mContentEditText;
 
 
+
     private static final boolean USE_FLAG = true;
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
 
@@ -101,15 +102,15 @@ public class SQLExample extends AppCompatActivity {
 
     // Find review by username and put their review ID and Content in appropriate fields
     public void findButtonClick(View v){
-        String userID = mUserIDEditText.getText().toString();
+        String reviewID = mIDTextView.getText().toString();
         ReviewDBHandler handler = new ReviewDBHandler(this);
 
-        Review review = handler.findReview(Integer.parseInt(userID));
+        Review review = handler.findReview(Integer.parseInt(reviewID));
 
         if(review != null){
             mIDTextView.setText(String.valueOf(review.getmID()));
             mContentEditText.setText(review.getmContent());
-            mUserIDEditText.setText(review.getmUserID());
+            mUserIDEditText.setText(String.valueOf(review.getmUserID()));
         }
         else{
             mIDTextView.setText("User was not found.");

@@ -169,7 +169,8 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
             int score = c.getInt(iScore);
             int userID = c.getInt(iUserID);
             int businessID = c.getInt(iBusinessID);
-            if( userID == 1) {
+            //If there is more than 15 reviews than the account page crashes randomly
+            if( userID == 1 && review_list.size() < 15) {
                 review_list.add(new Review(reviewID, content, image, score, userID, businessID));
             }
 
@@ -219,10 +220,10 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
 
 
 
-    public Review findReview(int userid){
+    public Review findReview(int reviewID){
         String sqlQuery = "SELECT  * FROM " + TABLE_REVIEW +
-                " WHERE " + COLUMN_USERID + " =\"" +
-                userid + "\"";
+                " WHERE " + COLUMN_REVIEWID + " =\"" +
+                reviewID + "\"";
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor myCursor = db.rawQuery(sqlQuery, null);
@@ -242,17 +243,6 @@ public class ReviewDBHandler extends SQLiteOpenHelper  {
         db.close();
         return  myReview;
     }
-     /*
-    public Review(int d, String c, String i, int e, int f, int g){
-        mID = d;
-        mContent = c;
-        mImage = i;
-        mScore = e;
-        mUserID = f;
-        mBusinessID = g;
-    }
-
-     */
 
     public boolean deleteReview(String reviewID){
         boolean result = false;

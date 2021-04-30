@@ -22,6 +22,7 @@ public class AccountPage extends AppCompatActivity {
     private static final int mFlag = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
     ReviewRecyclerViewAdapter myAdapter2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -265,6 +265,7 @@ public class SamplePage extends AppCompatActivity {
     }
 
     //Command to send SMS
+    //PA6 Send intent instead
     public void getInfoButtonClick(View v){
 
         ReviewDBHandler review = new ReviewDBHandler(this);
@@ -272,9 +273,9 @@ public class SamplePage extends AppCompatActivity {
         //get Business list
         List<Business> businesses = review.getBusinesses();
 
-        if(businesses.get(mPageNum).getmWebsite() != null) {
+        if(businesses.get(mPageNum -1).getmWebsite() != null) {
             SmsManager smsManager = SmsManager.getDefault();
-            String message = businesses.get(mPageNum).getmWebsite();
+            String message = businesses.get(mPageNum - 1).getmWebsite();
 
             try {
                 smsManager.sendTextMessage("5556", null, message, null, null);
@@ -286,7 +287,7 @@ public class SamplePage extends AppCompatActivity {
             }
         }
         else{
-            Toast.makeText(this,"Please enter both phone number and message.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"This establishment does not have a website.", Toast.LENGTH_LONG).show();
         }
     }
 

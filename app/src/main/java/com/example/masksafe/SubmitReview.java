@@ -41,7 +41,8 @@ public class SubmitReview extends AppCompatActivity {
 
     //View and score related
     private EditText mEnterReview;
-    private Boolean mScore;
+    private boolean virusScore;
+    private boolean maskScore;
     private int score;
     private ImageButton mImageButton;
 
@@ -50,7 +51,6 @@ public class SubmitReview extends AppCompatActivity {
     private static final int MEDIA_TYPE_IMAGE = 1;
     private static Uri fileUri;
     private static Context context;
-    private TextView errorMSG;
 
 
     @Override
@@ -63,7 +63,6 @@ public class SubmitReview extends AppCompatActivity {
         mPageNum = mydata.getInt(KEY_PAGE);
 
         mEnterReview = (EditText) findViewById(R.id.enterReview);
-        errorMSG = (TextView) findViewById(R.id.errorMSG);
         context = getApplicationContext();
         mImageButton = (ImageButton) findViewById(R.id.enterImage);
 
@@ -83,7 +82,6 @@ public class SubmitReview extends AppCompatActivity {
         AB.setLogo(R.drawable.ic_logo);
 
 
-        errorMSG.setText("state: " + Environment.getExternalStorageState());
 
     }
 
@@ -135,37 +133,89 @@ public class SubmitReview extends AppCompatActivity {
    //Next two functions set the score for the review
     public void maskButtonClick(View v){
         Toast.makeText(this,"You have determined this establishment pandemic friendly.", Toast.LENGTH_LONG).show();
-        mScore = true;
-        mEnterReview.setText("");
+        maskScore = true;
+        virusScore = false;
     }
 
     public void virusButtonClick(View v){
         Toast.makeText(this,"You have determined this establishment disgusting.", Toast.LENGTH_LONG).show();
-        mScore = false;
-        mEnterReview.setText("");
+        maskScore = false;
+        virusScore = true;
     }
 
 
     //Submit review into the database
+
+    //minimum char check for string
+
     public void submitReviewButtonClick(View v){
         String content = mEnterReview.getText().toString();
 
-        //Set score
-        if(mScore){
-            score = 1;
+        //Check to make sure the review length is at least 50 characters
+        if(mEnterReview.length() > 50 && fileUri != null){
+            //Set score
+            if(maskScore){
+                score = 1;
+                //Submit review
+                Review review = new Review(content, fileUri.toString(), score, 1, mPageNum);
+
+                ReviewDBHandler handler = new ReviewDBHandler(this);
+                handler.addReview(review);
+                mEnterReview.setText("");
+                mImageButton.setImageResource(picupload);
+                Toast.makeText(this,"Review Submitted.", Toast.LENGTH_LONG).show();
+            }
+            else if(virusScore){
+                score = 0;
+                //Submit review
+                Review review = new Review(content, fileUri.toString(), score, 1, mPageNum);
+
+                ReviewDBHandler handler = new ReviewDBHandler(this);
+                handler.addReview(review);
+                mEnterReview.setText("");
+                mImageButton.setImageResource(picupload);
+                Toast.makeText(this,"Review Submitted.", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(this,"You have not scored your review.", Toast.LENGTH_LONG).show();
+            }
+        }
+        //use case for if you do not have a picture with review
+        else if(mEnterReview.length() > 50){
+            if(maskScore){
+                score = 1;
+                //Submit review
+                Review review = new Review(content, null, score, 1, mPageNum);
+
+                ReviewDBHandler handler = new ReviewDBHandler(this);
+                handler.addReview(review);
+                mEnterReview.setText("");
+                mImageButton.setImageResource(picupload);
+                Toast.makeText(this,"Review Submitted.", Toast.LENGTH_LONG).show();
+            }
+            else if(virusScore){
+                score = 0;
+                //Submit review
+                Review review = new Review(content, null, score, 1, mPageNum);
+
+                ReviewDBHandler handler = new ReviewDBHandler(this);
+                handler.addReview(review);
+                mEnterReview.setText("");
+                mImageButton.setImageResource(picupload);
+                Toast.makeText(this,"Review Submitted.", Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(this,"You have not scored your review.", Toast.LENGTH_LONG).show();
+            }
+
         }
         else{
-            score = 0;
+            Toast.makeText(this,"Your review isn't long enough (50 characters required).", Toast.LENGTH_LONG).show();
         }
 
-        //Submit review
-        Review review = new Review(content, fileUri.toString(), score, 1, mPageNum);
 
-        ReviewDBHandler handler = new ReviewDBHandler(this);
-        handler.addReview(review);
-        mEnterReview.setText("");
-        mImageButton.setImageResource(picupload);
-        errorMSG.setText("");
+
+
 
     }
 
@@ -199,7 +249,6 @@ public class SubmitReview extends AppCompatActivity {
         try {
             Intent myIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             fileUri = getOutMediaFileUri(MEDIA_TYPE_IMAGE);
-            errorMSG.setText(errorMSG.getText() + "\nfileURI: " + fileUri.getPath());
             myIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
             startActivityForResult(myIntent, IMAGE_CAPTURE);
         }

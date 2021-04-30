@@ -80,13 +80,39 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position){
         viewHolder.getmReviewContent().setText(mReviewData.get(position).getmContent());
-        //Will reference Review class once Google Maps Api key is installed and I can select multiple businesses on the main activity
+
+        //set business name according to BusineesID number
         if(mReviewData.get(position).getmBusinessID() == 1){
             viewHolder.getmBusinessTitle().setText("Bloomington Cafe");
         }
-        else{
-            viewHolder.getmBusinessTitle().setText("Bub's Bugers");
+        else if(mReviewData.get(position).getmBusinessID() == 2){
+            viewHolder.getmBusinessTitle().setText("Bub's Burgers");
         }
+        else if(mReviewData.get(position).getmBusinessID() == 3){
+            viewHolder.getmBusinessTitle().setText("The Owlery Restaraunt");
+        }
+        else if(mReviewData.get(position).getmBusinessID() == 4){
+            viewHolder.getmBusinessTitle().setText("Malibu Grill");
+        }
+        else if(mReviewData.get(position).getmBusinessID() == 5){
+            viewHolder.getmBusinessTitle().setText("Juannita's");
+        }
+        else if(mReviewData.get(position).getmBusinessID() == 6){
+            viewHolder.getmBusinessTitle().setText("The 3 Amigos");
+        }
+        else if(mReviewData.get(position).getmBusinessID() == 7){
+            viewHolder.getmBusinessTitle().setText("Upland Brewery");
+        }
+        else if(mReviewData.get(position).getmBusinessID() == 8){
+            viewHolder.getmBusinessTitle().setText("Domino's Pizza");
+        }
+        else if(mReviewData.get(position).getmBusinessID() == 9){
+            viewHolder.getmBusinessTitle().setText("Starbucks");
+        }
+        else if(mReviewData.get(position).getmBusinessID() == 10){
+            viewHolder.getmBusinessTitle().setText("Taste of India");
+        }
+
         //I would have selected this by referencing a foreign key but that is not currently possible with how the database is set up
         if(mReviewData.get(position).getmUserID() == 1){
             viewHolder.getmUserName().setText("Sam Night");
