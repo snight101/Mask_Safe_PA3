@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.Menu;
@@ -274,12 +275,21 @@ public class SamplePage extends AppCompatActivity {
         List<Business> businesses = review.getBusinesses();
 
         if(businesses.get(mPageNum -1).getmWebsite() != null) {
-            SmsManager smsManager = SmsManager.getDefault();
+
+
             String message = businesses.get(mPageNum - 1).getmWebsite();
+            String phoneNumber = "5554";
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+
+
 
             try {
-                smsManager.sendTextMessage("5556", null, message, null, null);
-                Toast.makeText(this,"Message Sent.", Toast.LENGTH_LONG).show();
+                sendIntent.putExtra("sms_body", message);
+                sendIntent.putExtra("address", phoneNumber);
+
+                sendIntent.setData(Uri.parse("sms:"));
+
+                startActivity(sendIntent);
             }
             catch(Exception e){
                 e.printStackTrace();
